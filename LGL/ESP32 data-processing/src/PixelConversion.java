@@ -36,16 +36,17 @@ public class PixelConversion {
 
     };
 
+    static int width = 32;
+    static int height = 24;
+    static int expand = 4;
 
-    private static int[][] Conversion(float[][] Temptable){
-        int [][] Temp = new int[24][32];
-        for (int i = 0; i < 24; i++)
-        {
-            for (int j = 0; j < 32; j++)
+    private static int[][] GetRGB(float[][] Temptable){
+        int [][] Temp = new int[Temptable.length][Temptable[0].length];
+        for (int i = 0; i < Temptable.length; i++)
+            for (int j = 0; j < Temptable[i].length; j++)
             {
                 Temp[i][j] = ChangeColor(Temptable[i][j]);
             }
-        }
         return Temp;
     }
 
@@ -75,8 +76,8 @@ public class PixelConversion {
 
     public static void GetPicture(String Path, BufferedImage image, int[][] RGB){
         File file = new File(Path + "Picture.jpg");
-        for (int i = 0; i < 24; i++) {
-            for (int j = 0; j < 32; j++) {
+        for (int i = 0; i < RGB.length; i++) {
+            for (int j = 0; j < RGB[i].length; j++) {
                 image.setRGB(j,i,RGB[i][j]);
             }
         }
@@ -90,21 +91,121 @@ public class PixelConversion {
 
     public static void main(String args[])
     {
-        for (int i = 0; i < 24; i++) {
-            for (int j = 0; j < 32; j++) {
+        for (int i = 0; i < height; i++) {
+            for (int j = 0; j < width; j++) {
                 TemData[i][j] *= 16;
                 //System.out.print(TemData[i][j] + " ");
             }
            // System.out.println();
         }
 
-        int [][] RGB = Conversion(TemData);
+        /*
+        检验一维像素插值正确性
+        float[] array = {1,3,7,8,1,5,6,9,4,5,1,7,4,8,5,4};
+        float[] array2 = insert(array, 0);
+        for (int i = 0; i < array2.length; i++)
+            System.out.print(array2[i] + " ");
+        System.out.println();
+        float[] array3 = insert(array2, 1);
+        for (int i = 0; i < array3.length; i++)
+            System.out.print(array3[i] + " ");
+        System.out.println();
+        */
+
+
+        //此处进行像素插值算法拓展分辨率
+        float [][] Data_expand = Conversion(TemData);
+        //float [][] Data_expand = TemData;
+
+        /*for (int i = 0; i < Data_expand.length; i++){
+            for (int j = 0; j< Data_expand[i].length; j++){
+                System.out.print(Data_expand[i][j] + " ");
+            }
+            System.out.println();
+        }*/
+
+
+
+        int [][] RGB = GetRGB(Data_expand);
 
         String Path = "D:\\GITHUB\\333-334\\LGL\\ESP32 data-processing\\src\\";
-        BufferedImage image = new BufferedImage(32,24,BufferedImage.TYPE_INT_RGB);
+        BufferedImage image = new BufferedImage(Data_expand[0].length,Data_expand.length,BufferedImage.TYPE_INT_RGB);
 
         GetPicture(Path,image,RGB);
 
+    }
+
+    //一维数组插值
+    private static float[] insert(float[] array, int judge){
+        float[] temp = new float[array.length * 2];
+
+        int Index;
+        //头部插值补位
+        if (judge == 0)
+        {
+            temp[0] = array[0];
+            temp[1] = array[0];
+            Index = 1;
+        }
+        //尾部插值补位
+        else
+        {
+            temp[array.length * 2 - 1] = array[array.length - 1];
+            temp[0] = array[0];
+            Index = 0;
+        }
+        for (int i = 1; i < array.length; i++){
+            temp[Index + 1] = (temp[Index] + array[i]) / 2;
+            Index++;
+            temp[Index + 1] = array[i];
+            Index++;
+        }
+        return temp;
+    }
+
+    private static float[][] Conversion(float[][] temData) {
+        float[][] Temp_Data_expand = new  float[temData.length * expand * expand][temData[0].length];
+        float[][] Data_expand = new float[temData.length * expand * expand][temData[0].length * expand * expand];
+
+        //纵向插值
+        for (int x = 0; x < temData[0].length; x++)
+        {
+            //获取每一列
+            float []array = new float[temData.length];
+            for (int y = 0; y < temData.length; y++){
+                array[y] = temData[y][x];
+            }
+            //对每一列进行插值
+            int judge = 0;
+            for (int n = 0; n < expand; n++){
+                array = insert(array, judge);
+                judge = (judge + 1) % 2;
+            }
+            for (int y = 0; y < array.length; y++){
+                Temp_Data_expand[y][x] = array[y];
+            }
+        }
+
+        //横向插值
+        for (int y = 0; y < Temp_Data_expand.length; y++)
+        {
+            //获取每一行
+            float []array = new float[Temp_Data_expand[y].length];
+            for (int x = 0; x < Temp_Data_expand[y].length; x++){
+                array[x] = Temp_Data_expand[y][x];
+            }
+            //对每一行进行插值
+            int judge = 0;
+            for (int n = 0; n < expand; n++){
+                array = insert(array, judge);
+                judge = (judge + 1) % 2;
+            }
+            for (int x = 0; x < array.length; x++){
+                Data_expand[y][x] = array[x];
+            }
+        }
+
+        return Data_expand;
     }
 
 }

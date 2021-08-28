@@ -8,13 +8,8 @@
 
 //返回值：插值后的一维数组（数量是插值前*4）
 
-function PolynomialInterpolationArr(
-
-SourceDatas:TDoubles;
-
-Dir:Integer;
-
-times:Integer):TDoubles;//一维数组插值
+function PolynomialInterpolationArr(SourceDatas:TDoubles;Dir:Integer;times:Integer):TDoubles;
+//一维数组插值
 
 var
 
