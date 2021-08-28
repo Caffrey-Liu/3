@@ -1,0 +1,293 @@
+//这是一维数组插值算法
+
+//SourceDatas:TDoubles;插值前的一维数组
+
+//Dir:Integer;在哪个方向和末尾插入2个值（0：前面；1：末尾）
+
+//times:Integer多项式的项数，一次多项式是2项，二次多项式是3项
+
+//返回值：插值后的一维数组（数量是插值前*4）
+
+function PolynomialInterpolationArr(
+
+SourceDatas:TDoubles;
+
+Dir:Integer;
+
+times:Integer):TDoubles;//一维数组插值
+
+var
+
+    i,j,k:Integer;
+
+    arrCount:Integer;
+
+    startIndex:Integer;
+
+    OriginDatas,TargetDatas:ArrayOf2D;
+
+    tempStr:string;
+
+    tempDou:Double;
+
+    coes:array[0..5] of Double;
+
+begin
+
+    arrCount:=Length(SourceDatas);
+
+    SetLength(Result,arrCount*4);
+
+    if Dir=0 then   startIndex:=2
+
+    else            startIndex:=1;
+
+
+
+    //源数据复制到目标数组Result
+
+    for i := 0 to arrCount-1 do
+
+    begin
+
+        Result[startIndex+i*4]:=SourceDatas[i];
+
+    end;
+
+
+
+    SetLength(OriginDatas,2,times);
+
+    //插值，插值完成后是*4像素
+
+    for i := 0 to arrCount-times do
+
+    begin
+
+        for j := 0 to times-1 do//初始化拟合原始数据
+
+        begin
+
+            OriginDatas[0][j]:=j*4;
+
+            OriginDatas[1][j]:=SourceDatas[i+j];
+
+        end;
+
+        GetPolyData_U(OriginDatas,times,coes);
+
+        //插值
+
+        for j := 1 to 4-1 do
+
+        begin
+
+            if times>=2 then    tempDou:=coes[0]+j*coes[1];
+
+            if times>=3 then    tempDou:=tempDou+j*j*coes[2];
+
+            if times>=4 then    tempDou:=tempDou+j*j*j*coes[3];
+
+
+
+            Result[startIndex+i*4+j]:=tempDou;
+
+        end;
+
+    end;
+
+    //两端插值，两端插值直接使用线性插值（一次多项式）
+
+    SetLength(OriginDatas,2,2);
+
+    //前端插值
+
+    OriginDatas[0][0]:=0;
+
+    OriginDatas[1][0]:=SourceDatas[0];
+
+    OriginDatas[0][1]:=4;
+
+    OriginDatas[1][1]:=SourceDatas[1];
+
+    GetPolyData_U(OriginDatas,2,coes);
+
+    if Dir=0 then
+
+    begin
+
+        tempDou:=coes[0]+(-1)*coes[1];
+
+        Result[1]:=tempDou;
+
+        tempDou:=coes[0]+(-2)*coes[1];
+
+        Result[0]:=tempDou;
+
+    end
+
+    else
+
+    begin
+
+        tempDou:=coes[0]+(-1)*coes[1];
+
+        Result[0]:=tempDou;
+
+    end;
+
+    //末端插值
+
+    for i := (arrCount-times) to (arrCount-2) do
+
+    begin
+
+        for j := 0 to 2-1 do//初始化拟合原始数据
+
+        begin
+
+            OriginDatas[0][j]:=j*4;
+
+            OriginDatas[1][j]:=SourceDatas[i+j];
+
+        end;
+
+        GetPolyData_U(OriginDatas,2,coes);
+
+        //插值
+
+        for j := 1 to 4-1 do
+
+        begin
+
+            tempDou:=coes[0]+j*coes[1];
+
+            Result[startIndex+i*4+j]:=tempDou;
+
+        end;
+
+    end;
+
+    if Dir=0 then
+
+    begin
+
+        tempDou:=coes[0]+(5)*coes[1];
+
+        Result[arrCount*4-1]:=tempDou;
+
+    end
+
+    else
+
+    begin
+
+        tempDou:=coes[0]+(5)*coes[1];
+
+        Result[arrCount*4-2]:=tempDou;
+
+        tempDou:=coes[0]+(6)*coes[1];
+
+        Result[arrCount*4-1]:=tempDou;
+
+    end;
+
+end;
+
+上面函数里用到的一个系数求解函数如下
+
+function GetPolyData_U(OriginData: ArrayOf2D;times:Integer;var coes:array of Double): ArrayOf2D;//times为项数，1次多项式有ab两项，以些类推
+
+var
+
+    x1,x2,x3,x4:Double;
+
+    y1,y2,y3,y4:Double;
+
+begin
+
+    //1次多项式：a+bx=y
+
+    //2次多项式：a+bx+cx^2=y
+
+    //3次多项式：a+bx+cx^2+dx^3=y
+
+    if ((times<2) or (times>4)) then
+
+        times:=2;
+
+    if times=2 then
+
+    begin
+
+        x1:=OriginData[0][0];
+
+        x2:=OriginData[0][1];
+
+        y1:=OriginData[1][0];
+
+        y2:=OriginData[1][1];
+
+        coes[1]:=(y2-y1)/x2;
+
+        coes[0]:=y1;
+
+    end
+
+    else if times=3 then
+
+    begin
+
+        x1:=OriginData[0][0];
+
+        x2:=OriginData[0][1];
+
+        x3:=OriginData[0][2];
+
+        y1:=OriginData[1][0];
+
+        y2:=OriginData[1][1];
+
+        y3:=OriginData[1][2];
+
+        coes[2]:=((y3-y1)*x2-(y2-y1)*x3)/(x2*x3*x3-x2*x2*x3);
+
+        coes[1]:=(y2-y1)/x2-coes[2]*x2;
+
+        coes[0]:=y1;
+
+    end
+
+    else if times=4 then
+
+    begin
+
+        x1:=OriginData[0][0];
+
+        x2:=OriginData[0][1];
+
+        x3:=OriginData[0][2];
+
+        x4:=OriginData[0][3];
+
+        y1:=OriginData[1][0];
+
+        y2:=OriginData[1][1];
+
+        y3:=OriginData[1][2];
+
+        y4:=OriginData[1][3];
+
+        coes[3]:=((y4-y1)*x2-(y2-y1)*x4)/x2-((y3-y1)*x2-(y2-y1)*x3)/(x2*x3*x3-x2*x2*x3)*(x2*x4*x4-x2*x2*x4)/x2;
+
+        coes[3]:=coes[3]/((x2*x4*x4*x4-x2*x2*x2*x4)/x2-(x2*x3*x3*x3-x2*x2*x2*x3)/(x2*x3*x3-x2*x2*x3)*(x2*x4*x4-x2*x2*x4)/x2);
+
+        coes[2]:=((y3-y1)*x2-(y2-y1)*x3)/(x2*x3*x3-x2*x2*x3)-coes[3]*((x2*x3*x3*x3-x2*x2*x2*x3)/(x2*x3*x3-x2*x2*x3));
+
+        coes[1]:=((y2-y1)-coes[2]*x2*x2-coes[3]*x2*x2*x2)/x2;
+
+        coes[0]:=y1;
+
+    end;
+
+end;
