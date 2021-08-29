@@ -45,7 +45,7 @@
     <property name="project.structure.side.proportion" value="0.0" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
-  <component name="RunManager" selected="应用程序.PixelConversion">
+  <component name="RunManager" selected="应用程序.ServerTest">
     <configuration name="ImageCombining" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="ImageCombining" />
       <module name="ESP32 data-processing" />
@@ -60,21 +60,35 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
+    <configuration name="ServerTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="ServerTest" />
+      <module name="ESP32 data-processing" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Test" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Test" />
+      <module name="ESP32 data-processing" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="应用程序.ServerTest" />
+        <item itemvalue="应用程序.Test" />
         <item itemvalue="应用程序.PixelConversion" />
         <item itemvalue="应用程序.ImageCombining" />
       </list>
@@ -96,6 +110,10 @@
       <workItem from="1630152759064" duration="1302000" />
       <workItem from="1630154080494" duration="5058000" />
       <workItem from="1630160820664" duration="11695000" />
+      <workItem from="1630203100709" duration="6000" />
+      <workItem from="1630203837543" duration="904000" />
+      <workItem from="1630204762670" duration="19000" />
+      <workItem from="1630204795397" duration="5429000" />
     </task>
     <servers />
   </component>
