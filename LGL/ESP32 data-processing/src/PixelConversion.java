@@ -2,13 +2,15 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * @author Caffrey-Liu
  */
-public class PixelConversion {
+public class PixelConversion extends Thread{
 
-    static float [][] TemData = {
+    /*static float [][] TemData = {
             {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
             {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
             {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
@@ -34,13 +36,11 @@ public class PixelConversion {
             {0,0,0,0,0,0,0,0,0,0,0,0,0,15,0,0,0,15,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
             {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}
 
-    };
-
-    static int width = 32;
-    static int height = 24;
+    };*/
+    //插值次数
     static int expand = 4;
 
-    private static int[][] GetRGB(float[][] Temptable){
+    private int[][] GetRGB(float[][] Temptable){
         int [][] Temp = new int[Temptable.length][Temptable[0].length];
         for (int i = 0; i < Temptable.length; i++)
             for (int j = 0; j < Temptable[i].length; j++)
@@ -50,7 +50,7 @@ public class PixelConversion {
         return Temp;
     }
 
-    private static int ChangeColor(float Tem){
+    private int ChangeColor(float Tem){
         int Temp;
         int red = 0, green = 0, blue = 0;
         if ((Tem>=0) && (Tem<=63)) {
@@ -74,8 +74,8 @@ public class PixelConversion {
         return Temp;
     }
 
-    public static void GetPicture(String Path, BufferedImage image, int[][] RGB){
-        File file = new File(Path + "Picture.jpg");
+    public  void GetPicture(String Path, BufferedImage image, int[][] RGB){
+        File file = new File(Path + "Picture" + GetDate() + ".jpg");
         for (int i = 0; i < RGB.length; i++) {
             for (int j = 0; j < RGB[i].length; j++) {
                 image.setRGB(j,i,RGB[i][j]);
@@ -88,15 +88,30 @@ public class PixelConversion {
         }
     }
 
+    private String GetDate() {
 
-    public static void main(String args[])
+        Date date = new Date();//获取当前的日期
+        SimpleDateFormat df = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss");//设置日期格式
+        return df.format(date);
+    }
+
+
+    public  void DealWithData(float[][] TemData)
     {
-        for (int i = 0; i < height; i++) {
-            for (int j = 0; j < width; j++) {
-                TemData[i][j] *= 16;
-                //System.out.print(TemData[i][j] + " ");
+        for (int i = 0; i < TemData.length; i++) {
+            for (int j = 0; j < TemData[0].length; j++) {
+                //TemData[i][j] *= 16;
+                System.out.print(TemData[i][j] + " ");
             }
-           // System.out.println();
+            System.out.println();
+        }
+
+        for (int i = 0; i < TemData.length; i++) {
+            for (int j = 0; j < TemData[0].length; j++) {
+                TemData[i][j] = (TemData[i][j] - 24) * 16;
+                System.out.print(TemData[i][j] + " ");
+            }
+            System.out.println();
         }
 
         /*
@@ -114,8 +129,8 @@ public class PixelConversion {
 
 
         //此处进行像素插值算法拓展分辨率
-        float [][] Data_expand = Conversion(TemData);
-        //float [][] Data_expand = TemData;
+        //float [][] Data_expand = Conversion(TemData);
+        float [][] Data_expand = TemData;
 
         /*for (int i = 0; i < Data_expand.length; i++){
             for (int j = 0; j< Data_expand[i].length; j++){
@@ -128,7 +143,7 @@ public class PixelConversion {
 
         int [][] RGB = GetRGB(Data_expand);
 
-        String Path = "D:\\GITHUB\\333-334\\LGL\\ESP32 data-processing\\src\\";
+        String Path = "D:\\GITHUB\\333-334\\LGL\\ESP32 data-processing\\src\\jpg\\";
         BufferedImage image = new BufferedImage(Data_expand[0].length,Data_expand.length,BufferedImage.TYPE_INT_RGB);
 
         GetPicture(Path,image,RGB);
@@ -136,7 +151,7 @@ public class PixelConversion {
     }
 
     //一维数组插值
-    private static float[] insert(float[] array, int judge){
+    private  float[] insert(float[] array, int judge){
         float[] temp = new float[array.length * 2];
 
         int Index;
@@ -163,7 +178,7 @@ public class PixelConversion {
         return temp;
     }
 
-    private static float[][] Conversion(float[][] temData) {
+    private  float[][] Conversion(float[][] temData) {
         float[][] Temp_Data_expand = new  float[temData.length * expand * expand][temData[0].length];
         float[][] Data_expand = new float[temData.length * expand * expand][temData[0].length * expand * expand];
 
@@ -208,4 +223,7 @@ public class PixelConversion {
         return Data_expand;
     }
 
+    public void run(float[][] TemData){
+        DealWithData(TemData);
+    }
 }
