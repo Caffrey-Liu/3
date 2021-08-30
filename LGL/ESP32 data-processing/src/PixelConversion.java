@@ -108,7 +108,7 @@ public class PixelConversion extends Thread{
 
         for (int i = 0; i < TemData.length; i++) {
             for (int j = 0; j < TemData[0].length; j++) {
-                TemData[i][j] = (TemData[i][j] - 24) * 16;
+                TemData[i][j] = (TemData[i][j] - 20) * 8;
                 System.out.print(TemData[i][j] + " ");
             }
             System.out.println();
@@ -129,8 +129,8 @@ public class PixelConversion extends Thread{
 
 
         //此处进行像素插值算法拓展分辨率
-        //float [][] Data_expand = Conversion(TemData);
-        float [][] Data_expand = TemData;
+        float [][] Data_expand = Conversion(TemData);
+        //float [][] Data_expand = TemData;
 
         /*for (int i = 0; i < Data_expand.length; i++){
             for (int j = 0; j< Data_expand[i].length; j++){
