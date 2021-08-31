@@ -2,7 +2,9 @@
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
 
 public class MyServer extends Thread{
     int port;
@@ -10,6 +12,12 @@ public class MyServer extends Thread{
     {
         this.port = port;
         this.start();
+    }
+    private String GetDate() {
+
+        Date date = new Date();//获取当前的日期
+        SimpleDateFormat df = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss");//设置日期格式
+        return df.format(date);
     }
     public void run()
     {
@@ -22,6 +30,7 @@ public class MyServer extends Thread{
             int x = 0;
             int y = 0;
             while(!line.equals("bye")){
+                //System.out.println(GetDate());
                 //System.out.println(line + " ");
                 if (line.equals("end"))
                 {

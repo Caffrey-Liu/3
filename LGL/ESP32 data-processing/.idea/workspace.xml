@@ -74,6 +74,17 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="应用程序.ServerTest" />
@@ -107,10 +118,27 @@
       <workItem from="1630215520051" duration="5915000" />
       <workItem from="1630221857327" duration="34000" />
       <workItem from="1630222285832" duration="263000" />
+      <workItem from="1630291913466" duration="64000" />
+      <workItem from="1630292544051" duration="2789000" />
+      <workItem from="1630296694009" duration="482000" />
+      <workItem from="1630320916641" duration="3692000" />
+      <workItem from="1630339544630" duration="397000" />
+      <workItem from="1630409160720" duration="8314000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/MyServer.java</url>
+          <line>35</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
