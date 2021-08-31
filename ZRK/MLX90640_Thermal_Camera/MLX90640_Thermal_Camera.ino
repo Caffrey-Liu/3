@@ -11,7 +11,6 @@ WiFiClient client;
 paramsMLX90640 mlx90640;
 const byte MLX90640_address = 0x33; //Default 7-bit unshifted address of the MLX90640
 static float tempValues[32 * 24];
-
 void connectToNetwork(){
   WiFi.begin(ssid,password);
   while (WiFi.status()!= WL_CONNECTED) {
@@ -50,13 +49,13 @@ void setup() {
   if (status != 0) Serial.println("Failed to load system parameters");
   status = MLX90640_ExtractParameters(eeMLX90640, &mlx90640);
   if (status != 0) Serial.println("Parameter extraction failed");
-  MLX90640_SetRefreshRate(MLX90640_address, 0x05); 
+  MLX90640_SetRefreshRate(MLX90640_address, 0x06); 
   Wire.setClock(800000);
 }
 
 void loop(void) {
   readTempValues();
-  delay(2000);
+  //delay(2000);
 }
 
 void readTempValues() {
@@ -77,18 +76,22 @@ void readTempValues() {
 
     MLX90640_CalculateTo(mlx90640Frame, &mlx90640, EMMISIVITY, tr, tempValues);
   }
-  Serial.println("\r\n===========================WaveShare MLX90640 Thermal Camera===============================");
+  String str = "begin";
   for (int i = 0; i < 768; i++) {
 //    if (((i % 32) == 0) && (i != 0)) {
 //      Serial.println(" ");
 //    }
-//    Serial.print((int)tempValues[i]);
-//    Serial.print(" ");
-      client.println(tempValues[i]);
+   //Serial.print((int)tempValues[i]);
+   // Serial.print(" ");
+     str = str+",";
+    str = str+tempValues[i];
+      
+    
       
   }
-  client.println("end");
-  Serial.println("\r\n===========================WaveShare MLX90640 Thermal Camera===============================");
+  //Serial.println(str);
+  client.println(str);
+  
 }
 
 void Device_Scan() {

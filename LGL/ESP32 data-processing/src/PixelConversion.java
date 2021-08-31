@@ -119,7 +119,7 @@ public class PixelConversion extends Thread {
     private String GetDate() {
 
         Date date = new Date();//获取当前的日期
-        SimpleDateFormat df = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss");//设置日期格式
+        SimpleDateFormat df = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss_SSS");//设置日期格式
         return df.format(date);
     }
 
