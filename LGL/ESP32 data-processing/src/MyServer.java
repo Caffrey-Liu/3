@@ -41,7 +41,7 @@ public class MyServer extends Thread {
                             TemData[y][x] = Float.parseFloat(lines[Index-1]);
                             Index++;
                         }
-                        else if (lines[Index].equals("nan") && Index == 0) {
+                        else if (lines[Index].equals("nan") && Index == 1) {
                             TemData[y][x] = 0;
                             Index++;
                         }

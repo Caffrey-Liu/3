@@ -25,7 +25,7 @@ void setup() {
   Serial.println(WiFi.macAddress());
   Serial.println(WiFi.localIP());
 
-  if (!client.connect("192.168.31.248", 10001))//连接的IP地址和
+  if (!client.connect("192.168.201.150", 10001))//连接的IP地址和
     {
         Serial.println("Connection to host failed");
         delay(1000);
@@ -33,7 +33,7 @@ void setup() {
     }
   delay(1000);  
   Wire.begin();
-  Wire.setClock(400000); 
+  Wire.setClock(3400000); 
   Wire.beginTransmission((uint8_t)MLX90640_address);
   if (Wire.endTransmission() != 0) {
     Serial.println("MLX90640 not detected at default I2C address. Starting scan the device addr...");
