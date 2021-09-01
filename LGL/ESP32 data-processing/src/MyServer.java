@@ -30,6 +30,7 @@ public class MyServer extends Thread {
             float[][] TemData = new float[24][32];
             int x = 0;
             int y = 0;
+            Draw pic = new Draw();
             while (!line.equals("bye")) {
                 //System.out.println(GetDate());
                 // System.out.println(line + " ");
@@ -38,7 +39,8 @@ public class MyServer extends Thread {
                 for (y = 0; y < 24; y++)
                     for (x = 0; x < 32; x++) {
                         if (lines[Index].equals("nan") && Index != 1) {
-                            TemData[y][x] = Float.parseFloat(lines[Index-1]);
+                            if (x != 0) TemData[y][x] = TemData[y][x-1];
+                            else TemData[y][x] = TemData[y-1][31];
                             Index++;
                         }
                         else if (lines[Index].equals("nan") && Index == 1) {
@@ -51,7 +53,7 @@ public class MyServer extends Thread {
                 PixelConversion picture = new PixelConversion();
                 float[][] Complete_TemData;
                 Complete_TemData = TemData;
-                picture.run(Complete_TemData);
+                picture.run(Complete_TemData,pic);
 //                if (line.equals("end"))
 //                {
 //                    //处理温度数组
