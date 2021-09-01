@@ -113,7 +113,8 @@
       <workItem from="1630320916641" duration="3692000" />
       <workItem from="1630339544630" duration="397000" />
       <workItem from="1630409160720" duration="8314000" />
-      <workItem from="1630419769011" duration="4286000" />
+      <workItem from="1630419769011" duration="13494000" />
+      <workItem from="1630464917614" duration="1511000" />
     </task>
     <servers />
   </component>
@@ -125,9 +126,13 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/MyServer.java</url>
-          <line>55</line>
+          <line>57</line>
           <option name="timeStamp" value="2" />
         </line-breakpoint>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.NumberFormatException" package="java.lang" />
+          <option name="timeStamp" value="3" />
+        </breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>

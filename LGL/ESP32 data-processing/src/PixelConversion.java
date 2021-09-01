@@ -1,4 +1,5 @@
 import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -9,6 +10,7 @@ import java.util.Date;
  * @author Caffrey-Liu
  */
 public class PixelConversion extends Thread {
+
 
     /*static float [][] TemData = {
             {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
@@ -41,6 +43,7 @@ public class PixelConversion extends Thread {
     static int expand = 4;
     //static String ColorType = "GCM_Pseudo2";  //伪彩2
     static String ColorType = "GCM_Rainbow3";  //彩虹3
+    Draw pic;
 
     private int[][] GetRGB(float[][] Temptable) {
         int[][] Temp = new int[Temptable.length][Temptable[0].length];
@@ -100,15 +103,19 @@ public class PixelConversion extends Thread {
         Temp = (red << 16) + (green << 8) + blue;
         return Temp;
     }
-
+    
 
     public void GetPicture(String Path, BufferedImage image, int[][] RGB) {
-        File file = new File(Path + "Picture" + GetDate() + ".jpg");
+        String date = GetDate();
+        File file = new File(Path + "Picture" + date + ".jpg");
         for (int i = 0; i < RGB.length; i++) {
             for (int j = 0; j < RGB[i].length; j++) {
                 image.setRGB(j, i, RGB[i][j]);
             }
         }
+
+        pic.PutImage(image);
+
         try {
             ImageIO.write(image, "jpg", file);
         } catch (IOException e) {
@@ -137,11 +144,12 @@ public class PixelConversion extends Thread {
         //这里是温度数据区间转换
         for (int i = 0; i < TemData.length; i++) {
             for (int j = 0; j < TemData[0].length; j++) {
-                if (TemData[i][j] <= 30) TemData[i][j] = 0;
+                if (TemData[i][j] <= 28) TemData[i][j] = 0;
                 //else if (TemData[i][j] > 20 && TemData[i][j] <= 27) TemData[i][j] = (TemData[i][j] * 7) - 140;
                 //else if (TemData[i][j] > 20 && TemData[i][j] <= 27) TemData[i][j] = (TemData[i][j] * 49 / 9) - 109;
                 //else if (TemData[i][j] > 27 && TemData[i][j] <= 33) TemData[i][j] = (TemData[i][j] * 9) - 194;
-                else if (TemData[i][j] > 30 && TemData[i][j] <= 33) TemData[i][j] = (TemData[i][j] * 13) - 343;
+                else if (TemData[i][j] > 28
+                        && TemData[i][j] <= 33) TemData[i][j] = (TemData[i][j] * 13) - 343;
                 else if (TemData[i][j] > 33 && TemData[i][j] <= 37) TemData[i][j] = (TemData[i][j] * 32) - 953;
                 else if (TemData[i][j] > 37 && TemData[i][j] <= 40) TemData[i][j] = (TemData[i][j] * 8) - 65;
                 //System.out.print((int)TemData[i][j] + " ");
@@ -183,6 +191,7 @@ public class PixelConversion extends Thread {
         BufferedImage image = new BufferedImage(Data_expand[0].length, Data_expand.length, BufferedImage.TYPE_INT_RGB);
 
         GetPicture(Path, image, RGB);
+
 
     }
 
@@ -255,7 +264,9 @@ public class PixelConversion extends Thread {
         return Data_expand;
     }
 
-    public void run(float[][] TemData) {
+    public void run(float[][] TemData,Draw pic) {
+        this.pic = pic;
         DealWithData(TemData);
     }
+
 }
