@@ -40,14 +40,28 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/lib/mysql-connector-java-8.0.26.jar" />
     <property name="project.structure.last.edited" value="模块" />
-    <property name="project.structure.proportion" value="0.0" />
-    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.16528928" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
-  <component name="RunManager" selected="应用程序.ServerTest">
-    <configuration name="ImageCombining" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="ImageCombining" />
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\GITHUB\333-334\LGL\ESP32 data-processing\lib" />
+      <recent name="D:\GITHUB\333-334\LGL\ESP32 data-processing\src\lib" />
+    </key>
+  </component>
+  <component name="RunManager" selected="应用程序.Mysqlconnect">
+    <configuration name="DataConnect" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="DataConnect" />
+      <module name="ESP32 data-processing" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Mysqlconnect" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Mysqlconnect" />
       <module name="ESP32 data-processing" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -74,12 +88,24 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="应用程序.Mysqlconnect" />
         <item itemvalue="应用程序.ServerTest" />
+        <item itemvalue="应用程序.DataConnect" />
         <item itemvalue="应用程序.Test" />
         <item itemvalue="应用程序.PixelConversion" />
-        <item itemvalue="应用程序.ImageCombining" />
       </list>
     </recent_temporary>
   </component>
@@ -115,6 +141,10 @@
       <workItem from="1630409160720" duration="8314000" />
       <workItem from="1630419769011" duration="13494000" />
       <workItem from="1630464917614" duration="1511000" />
+      <workItem from="1630473590254" duration="1117000" />
+      <workItem from="1630507690033" duration="122000" />
+      <workItem from="1630556457167" duration="2705000" />
+      <workItem from="1630561192611" duration="3492000" />
     </task>
     <servers />
   </component>
