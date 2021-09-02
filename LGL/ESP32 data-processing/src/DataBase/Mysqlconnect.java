@@ -1,3 +1,4 @@
+package DataBase;
 import java.sql.*;
 public class Mysqlconnect {
     public static void main(String args[]){

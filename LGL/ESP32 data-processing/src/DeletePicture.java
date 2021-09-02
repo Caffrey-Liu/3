@@ -1,0 +1,16 @@
+import java.io.File;
+
+public class DeletePicture {
+    static String Path = "D:\\GITHUB\\333-334\\LGL\\ESP32 data-processing\\src\\jpg\\";
+    public static void folderMethod(String path) {
+        File file = new File(path);
+        if (file.exists()) {
+            File[] files = file.listFiles();
+            for (File file2 : files) file2.delete();
+            System.out.println("删除完毕");
+        }
+    }
+    public static void main(String args[]){
+        folderMethod(Path);
+    }
+}
