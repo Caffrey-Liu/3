@@ -25,7 +25,7 @@ void setup() {
   Serial.println(WiFi.macAddress());
   Serial.println(WiFi.localIP());
 
-  if (!client.connect("192.168.43.45", 10001))//连接的IP地址和
+  if (!client.connect("192.168.31.248", 10001))//连接的IP地址和端口
     {
         Serial.println("Connection to host failed");
         delay(1000);
