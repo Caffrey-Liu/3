@@ -56,7 +56,7 @@
       <recent name="D:\GITHUB\333-334\LGL\ESP32 data-processing\src\lib" />
     </key>
   </component>
-  <component name="RunManager" selected="应用程序.DeletePicture">
+  <component name="RunManager" selected="应用程序.ServerStart">
     <configuration name="DeletePicture" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="DeletePicture" />
       <module name="ESP32 data-processing" />
@@ -94,10 +94,10 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="应用程序.ServerStart" />
         <item itemvalue="应用程序.DeletePicture" />
         <item itemvalue="应用程序.TestImageBinary" />
         <item itemvalue="应用程序.opencv" />
-        <item itemvalue="应用程序.ServerStart" />
         <item itemvalue="应用程序.interpolation" />
       </list>
     </recent_temporary>
@@ -150,6 +150,9 @@
       <workItem from="1630611950749" duration="5490000" />
       <workItem from="1630617489450" duration="6000" />
       <workItem from="1630617969653" duration="12000" />
+      <workItem from="1630618049462" duration="457000" />
+      <workItem from="1630618598822" duration="26000" />
+      <workItem from="1630640718822" duration="663000" />
     </task>
     <servers />
   </component>
