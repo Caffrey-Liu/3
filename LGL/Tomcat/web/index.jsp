@@ -12,5 +12,6 @@
   </head>
   <body>
   <h1>hello!!!!!!</h1>
+  <a href="./Camera.jsp">Camera</a>
   </body>
 </html>

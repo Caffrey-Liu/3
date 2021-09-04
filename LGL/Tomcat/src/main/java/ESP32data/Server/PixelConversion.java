@@ -5,12 +5,12 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
 /**
  * @author Caffrey-Liu
  */
-public class PixelConversion extends Thread {
+public class PixelConversion extends Thread{
     //插值次数
+    public Bridge bridge;
     static int expand = 4;
     //static String ColorType = "GCM_Pseudo2";  //伪彩2
     static String ColorType = "GCM_Rainbow3";  //彩虹3
@@ -85,6 +85,7 @@ public class PixelConversion extends Thread {
             }
         }
 
+        this.bridge.setImage(image);
         pic.PutImage(image);
 
         try {
@@ -103,15 +104,15 @@ public class PixelConversion extends Thread {
 
 
     public void DealWithData(float[][] TemData) {
-        for (int i = 0; i < TemData.length; i++) {
+       /* for (int i = 0; i < TemData.length; i++) {
             for (int j = 0; j < TemData[0].length; j++) {
                 System.out.print((int) TemData[i][j] + " ");
             }
             System.out.println();
-        }
+        }*/
         //System.out.println();
        // System.out.println();\
-        System.out.println(GetDate());
+      /*  System.out.println(GetDate());*/
         //这里是温度数据区间转换
         for (int i = 0; i < TemData.length; i++) {
             for (int j = 0; j < TemData[0].length; j++) {
@@ -235,7 +236,8 @@ public class PixelConversion extends Thread {
         return Data_expand;
     }
 
-    public void run(float[][] TemData,Draw pic) {
+    public void run(float[][] TemData,Draw pic,Bridge bridge) {
+        this.bridge = bridge;
         this.pic = pic;
         DealWithData(TemData);
     }

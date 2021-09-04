@@ -7,6 +7,8 @@ import java.util.Date;
 
 public class MyServer extends Thread {
     int port;
+    public static Bridge bridge;
+
 
     public void startListen(int port) {
         this.port = port;
@@ -22,6 +24,7 @@ public class MyServer extends Thread {
 
     public void run() {
         try {
+            bridge = new Bridge();
             ServerSocket server = new ServerSocket(port);
             Socket socket = server.accept();
             BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
@@ -52,7 +55,7 @@ public class MyServer extends Thread {
                 PixelConversion picture = new PixelConversion();
                 float[][] Complete_TemData;
                 Complete_TemData = TemData;
-                picture.run(Complete_TemData,pic);
+                picture.run(Complete_TemData,pic,bridge);
 //                if (line.equals("end"))
 //                {
 //                    //处理温度数组

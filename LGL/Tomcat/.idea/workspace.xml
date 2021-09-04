@@ -18,6 +18,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Jsp File" />
         <option value="Class" />
       </list>
     </option>
@@ -75,7 +76,7 @@
       </method>
     </configuration>
     <configuration name="Tomcat 9.0.52" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 9.0.52" ALTERNATIVE_JRE_ENABLED="false" nameIsGenerated="true">
-      <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8080/ProjectWeb/" />
+      <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8080/ProjectWeb" />
       <option name="UPDATING_POLICY" value="restart-server" />
       <deployment>
         <artifact name="Tomcat:war exploded">
@@ -181,6 +182,8 @@
       <option name="presentableId" value="Default" />
       <updated>1630738963277</updated>
       <workItem from="1630738965466" duration="10527000" />
+      <workItem from="1630754170120" duration="19727000" />
+      <workItem from="1630777997278" duration="78000" />
     </task>
     <servers />
   </component>
