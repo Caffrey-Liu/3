@@ -10,6 +10,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="HTML File" />
         <option value="Class" />
       </list>
     </option>
@@ -36,46 +37,28 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/lib/mysql-connector-java-8.0.26.jar" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/lib/commons-codec-1.9.jar" />
     <property name="project.structure.last.edited" value="模块" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.16528928" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\GITHUB\333-334\LGL\ESP32 data-processing\src\example" />
       <recent name="D:\GITHUB\333-334\LGL\ESP32 data-processing\lib" />
+      <recent name="D:\GITHUB\333-334\LGL\ESP32 data-processing\src\example" />
       <recent name="D:\GITHUB\333-334\LGL\ESP32 data-processing\src\lib" />
     </key>
   </component>
-  <component name="RunManager" selected="应用程序.DeletePicture">
+  <component name="RunManager" selected="应用程序.ServerStart">
     <configuration name="DeletePicture" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="DeletePicture" />
-      <module name="ESP32 data-processing" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Mysqlconnect (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="DataBase.Mysqlconnect" />
-      <module name="ESP32 data-processing" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="DataBase.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Mysqlconnect" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Mysqlconnect" />
       <module name="ESP32 data-processing" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -88,39 +71,34 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ServerTest (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Server.ServerTest" />
+    <configuration name="TestImageBinary" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="TestImageBinary" />
       <module name="ESP32 data-processing" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="Server.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
+    <configuration name="interpolation" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="interpolation" />
+      <module name="ESP32 data-processing" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="opencv" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="opencv" />
+      <module name="ESP32 data-processing" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="应用程序.DeletePicture" />
         <item itemvalue="应用程序.ServerStart" />
-        <item itemvalue="应用程序.ServerTest (1)" />
-        <item itemvalue="应用程序.Mysqlconnect (1)" />
-        <item itemvalue="应用程序.Mysqlconnect" />
+        <item itemvalue="应用程序.DeletePicture" />
+        <item itemvalue="应用程序.TestImageBinary" />
+        <item itemvalue="应用程序.opencv" />
+        <item itemvalue="应用程序.interpolation" />
       </list>
     </recent_temporary>
   </component>
@@ -161,7 +139,20 @@
       <workItem from="1630556457167" duration="2705000" />
       <workItem from="1630561192611" duration="3492000" />
       <workItem from="1630565238030" duration="657000" />
-      <workItem from="1630565918120" duration="1046000" />
+      <workItem from="1630565918120" duration="1351000" />
+      <workItem from="1630579648084" duration="5208000" />
+      <workItem from="1630585147375" duration="29000" />
+      <workItem from="1630585558520" duration="9000" />
+      <workItem from="1630595261100" duration="207000" />
+      <workItem from="1630595486495" duration="446000" />
+      <workItem from="1630599867191" duration="165000" />
+      <workItem from="1630608959335" duration="783000" />
+      <workItem from="1630611950749" duration="5490000" />
+      <workItem from="1630617489450" duration="6000" />
+      <workItem from="1630617969653" duration="12000" />
+      <workItem from="1630618049462" duration="457000" />
+      <workItem from="1630618598822" duration="26000" />
+      <workItem from="1630640718822" duration="663000" />
     </task>
     <servers />
   </component>
@@ -175,6 +166,11 @@
           <properties class="java.lang.NumberFormatException" package="java.lang" />
           <option name="timeStamp" value="3" />
         </breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/interpolation.java</url>
+          <line>127</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
