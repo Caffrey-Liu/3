@@ -21,8 +21,8 @@ public class TestImageBinary {
         // 对字节数组Base64编码
         return Base64.encodeBase64String(data);// 返回Base64编码过的字节数组字符串
     }
-  /*  public static void main(String[] args){
-        String data = GetImageStr("D:\\GITHUB\\333-334\\LGL\\ESP32 data-processing\\src\\jpg\\Picture2021_09_03_00_25_33_720.jpg");
+    public static void main(String[] args){
+        String data = GetImageStr("D:\\GITHUB\\333-334\\LGL\\Tomcat\\src\\main\\java\\ESP32data\\jpg\\Picture2021_09_05_13_21_54_067.jpg");
         System.out.println(data);
-    }*/
+    }
 } 

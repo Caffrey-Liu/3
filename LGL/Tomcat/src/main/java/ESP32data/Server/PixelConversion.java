@@ -1,8 +1,9 @@
 package ESP32data.Server;
+import org.apache.commons.codec.binary.Base64;
+
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 /**
@@ -10,11 +11,13 @@ import java.util.Date;
  */
 public class PixelConversion extends Thread{
     //插值次数
-    public Bridge bridge;
     static int expand = 4;
-    //static String ColorType = "GCM_Pseudo2";  //伪彩2
-    static String ColorType = "GCM_Rainbow3";  //彩虹3
-    Draw pic;
+    //插值维数
+    int times = 3;
+    static String ColorType = "GCM_Pseudo2";  //伪彩2
+    //static String ColorType = "GCM_Rainbow3";  //彩虹3
+    float[][] TempData;
+    String Picbase64;
 
     private int[][] GetRGB(float[][] Temptable) {
         int[][] Temp = new int[Temptable.length][Temptable[0].length];
@@ -25,20 +28,21 @@ public class PixelConversion extends Thread{
         return Temp;
     }
 
+    //把温度值转换为对应RGB值
     private int ChangeColor(float Tem, String Type, int x, int y) {
         int Temp;
         int red = 0, green = 0, blue = 0;
         if (Type.equals("GCM_Pseudo2")) {
-            if ((Tem >= 0) && (Tem <= 63)) {
+            if ((Tem >= 0) && (Tem <= 64)) {
                 blue = (int) (Tem / 64 * 255);
-            } else if ((Tem >= 64) && (Tem <= 127)) {
+            } else if ((Tem > 64) && (Tem <= 128)) {
                 green = (int) ((Tem - 64) / 64 * 255);
                 blue = (int) ((127 - Tem) / 64 * 255);
-            } else if ((Tem >= 128) && (Tem <= 191)) {
+            } else if ((Tem > 128) && (Tem <= 192)) {
                 red = (int) ((Tem - 128) / 64 * 255);
                 green = 255;
                 blue = 0;
-            } else if ((Tem >= 192) && (Tem <= 255)) {
+            } else if ((Tem > 192) && (Tem <= 255)) {
                 red = 255;
                 green = (int) ((255 - Tem) / 64 * 255);
                 blue = 0;
@@ -66,34 +70,78 @@ public class PixelConversion extends Thread{
                 blue = 0;
             }
         }
-        /*if (red == 0 && green == 0 && blue == 0) {
-            System.out.println("red = " + red + " green = " + green + " blue = " + blue);
-            System.out.println(Tem);
-            System.out.println("x == " + x + " y == " + y);
-        }*/
         Temp = (red << 16) + (green << 8) + blue;
         return Temp;
     }
     
+    //将RGB数组转换为图
+    public void GetPicture(BufferedImage image, int[][] RGB) {
 
-    public void GetPicture(String Path, BufferedImage image, int[][] RGB) {
-        String date = GetDate();
-        File file = new File(Path + "Picture" + date + ".jpg");
         for (int i = 0; i < RGB.length; i++) {
             for (int j = 0; j < RGB[i].length; j++) {
                 image.setRGB(j, i, RGB[i][j]);
             }
         }
 
-        this.bridge.setImage(image);
-        pic.PutImage(image);
 
+
+        //存储图片
+        SavePicture(image);
+
+    }
+
+    //保存图片到指定路径
+    public void SavePicture (BufferedImage image){
+        String Path = "D:\\GITHUB\\333-334\\LGL\\Tomcat\\src\\main\\java\\ESP32data\\jpg\\";
+        String JPGPath = Path + "Picture" + GetDate() + ".jpg";
+        File file = new File(JPGPath);
         try {
             ImageIO.write(image, "jpg", file);
         } catch (IOException e) {
             e.printStackTrace();
         }
+        Picbase64 = GetImageStr(JPGPath);
     }
+
+
+    // 通过image对象转换为流获得Base64编码
+    /*public String GetImageBase64Code(BufferedImage image) {
+        byte[] data = null;
+
+        // 读取图片字节数组
+        try {
+            //InputStream in = new FileInputStream(imgFilePath);
+            ByteArrayOutputStream os = new ByteArrayOutputStream();
+            ImageIO.write(image, "JPG", os);
+            InputStream in = ;
+            data = new byte[in.available()];
+            in.read(data);
+            in.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        String base64 = Base64.encodeBase64String(data);
+        return base64;
+    }*/
+
+    //通过路径获得Base64编码
+    public static String GetImageStr(String imgFilePath) {// 将图片文件转化为字节数组字符串，并对其进行Base64编码处理
+        byte[] data = null;
+
+        // 读取图片字节数组
+        try {
+            InputStream in = new FileInputStream(imgFilePath);
+            data = new byte[in.available()];
+            in.read(data);
+            in.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        // 对字节数组Base64编码
+        return Base64.encodeBase64String(data);// 返回Base64编码过的字节数组字符串
+    }
+
 
     private String GetDate() {
 
@@ -102,7 +150,7 @@ public class PixelConversion extends Thread{
         return df.format(date);
     }
 
-
+    //处理原始温度数据
     public void DealWithData(float[][] TemData) {
        /* for (int i = 0; i < TemData.length; i++) {
             for (int j = 0; j < TemData[0].length; j++) {
@@ -116,13 +164,20 @@ public class PixelConversion extends Thread{
         //这里是温度数据区间转换
         for (int i = 0; i < TemData.length; i++) {
             for (int j = 0; j < TemData[0].length; j++) {
-                if (TemData[i][j] <= 30) TemData[i][j] = 0;
-                //else if (TemData[i][j] > 20 && TemData[i][j] <= 27) TemData[i][j] = (TemData[i][j] * 7) - 140;
-                //else if (TemData[i][j] > 20 && TemData[i][j] <= 27) TemData[i][j] = (TemData[i][j] * 49 / 9) - 109;
-                //else if (TemData[i][j] > 27 && TemData[i][j] <= 33) TemData[i][j] = (TemData[i][j] * 9) - 194;
-                else if (TemData[i][j] > 30 && TemData[i][j] <= 33) TemData[i][j] = (TemData[i][j] * 13) - 343;
-                else if (TemData[i][j] > 33 && TemData[i][j] <= 37) TemData[i][j] = (TemData[i][j] * 32) - 953;
-                else if (TemData[i][j] > 37 && TemData[i][j] <= 40) TemData[i][j] = (TemData[i][j] * 8) - 65;
+                /*if (TemData[i][j] <= 15) TemData[i][j] = 0;
+                else if (TemData[i][j] > 15 && TemData[i][j] <= 20) TemData[i][j] = (TemData[i][j] * 8) - 112;
+                else if (TemData[i][j] > 20 && TemData[i][j] <= 26) TemData[i][j] = (float) ((TemData[i][j] * 5.3) - 34.7);
+                else if (TemData[i][j] > 26 && TemData[i][j] <= 32) TemData[i][j] = (float) ((TemData[i][j] * 16/3) -8/3);
+                else if (TemData[i][j] > 32 && TemData[i][j] <= 36) TemData[i][j] = (float) ((TemData[i][j] * 6) + 16);
+                else if (TemData[i][j] > 36 && TemData[i][j] <= 40) TemData[i][j] = (float) ((TemData[i][j] * 4) + 96);
+                else if (TemData[i][j] > 40) TemData[i][j] = 255;*/
+                if (TemData[i][j] <= 15) TemData[i][j] = 0;
+                else if (TemData[i][j] > 15 && TemData[i][j] <= 20) TemData[i][j] = (float)(TemData[i][j] * 4.8) - 40;
+                else if (TemData[i][j] > 20 && TemData[i][j] <= 26) TemData[i][j] = (float) ((TemData[i][j] * 13.33) -210.67);
+                else if (TemData[i][j] > 26 && TemData[i][j] <= 32) TemData[i][j] = (float) ((TemData[i][j] * 10.67) -141.33);
+                else if (TemData[i][j] > 32 && TemData[i][j] <= 36) TemData[i][j] = (float) ((TemData[i][j] * 8) - 56);
+                else if (TemData[i][j] > 36 && TemData[i][j] <= 40) TemData[i][j] = (float) ((TemData[i][j] * 5.75) + 25);
+                else if (TemData[i][j] > 40) TemData[i][j] = 254;
                 //System.out.print((int)TemData[i][j] + " ");
             }
             //System.out.println();
@@ -158,10 +213,9 @@ public class PixelConversion extends Thread{
 
         int[][] RGB = GetRGB(Data_expand);
 
-        String Path = "D:\\GITHUB\\333-334\\LGL\\Tomcat\\src\\main\\java\\ESP32data\\jpg\\";
         BufferedImage image = new BufferedImage(Data_expand[0].length, Data_expand.length, BufferedImage.TYPE_INT_RGB);
 
-        GetPicture(Path, image, RGB);
+        GetPicture(image, RGB);
 
 
     }
@@ -193,6 +247,7 @@ public class PixelConversion extends Thread{
         return temp;
     }
 
+    //插值算法
     private float[][] Conversion(float[][] temData) {
         float[][] Temp_Data_expand = new float[temData.length * expand * expand][temData[0].length];
         float[][] Data_expand = new float[temData.length * expand * expand][temData[0].length * expand * expand];
@@ -206,8 +261,9 @@ public class PixelConversion extends Thread{
             }
             //对每一列进行插值
             int judge = 0;
-            for (int n = 0; n < expand; n++) {
-                array = insert(array, judge);
+            for (int n = 0; n < 2; n++) {
+                //array = insert(array, judge);
+                array = Insertdata.insertdata(array, judge,times);
                 judge = (judge + 1) % 2;
             }
             for (int y = 0; y < array.length; y++) {
@@ -224,8 +280,9 @@ public class PixelConversion extends Thread{
             }
             //对每一行进行插值
             int judge = 0;
-            for (int n = 0; n < expand; n++) {
-                array = insert(array, judge);
+            for (int n = 0; n < 2; n++) {
+                //array = insert(array, judge);
+                array = Insertdata.insertdata(array, judge,times);
                 judge = (judge + 1) % 2;
             }
             for (int x = 0; x < array.length; x++) {
@@ -236,10 +293,19 @@ public class PixelConversion extends Thread{
         return Data_expand;
     }
 
-    public void run(float[][] TemData,Draw pic,Bridge bridge) {
-        this.bridge = bridge;
-        this.pic = pic;
-        DealWithData(TemData);
+    public String drawing(float[][] TemData) {
+        this.TempData = TemData;
+        this.start();
+        try {
+            this.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return Picbase64;
+    }
+
+    public void run(){
+        DealWithData(TempData);
     }
 
 }

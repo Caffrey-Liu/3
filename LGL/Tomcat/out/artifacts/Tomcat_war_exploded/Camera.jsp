@@ -12,19 +12,34 @@
 </head>
 <body>
 
-<form action="CameraServlet" method="get">
-    <p>First name: <input type="text" name="fname" /></p>
-    <p>Last name: <input type="text" name="lname" /></p>
-    <input type="submit" value="Submit" />
-</form>
-<button type="button" onclick="loadDoc()">请求数据</button>
-<script>
+<%--<form action="CameraServlet" method="get">--%>
+<%--    <p>First name: <input type="text" name="fname" /></p>--%>
+<%--    <p>Last name: <input type="text" name="lname" /></p>--%>
+<%--    <input type="submit" value="Submit" />--%>
+<%--</form>--%>
 
+<br>
+<br>
+<br>
+<br>
+<br>
+<div class="" align="center">
+<img id="pic" />
+</div>
+<br>
+<div align="center">
+<button type="button" onclick="loadDoc()">请求数据</button>
+</div>
+<br>
+<script>
+    var xhttp = new XMLHttpRequest();
+    var url = "data:image/png;base64,";
     function loadDoc() {
-        var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
-                document.getElementById("demo").innerHTML = this.responseText;
+                var String = this.responseText;
+                document.getElementById("pic").src = url+ String;
+                console.log(String);
             }
         };
         xhttp.open("GET", "CameraServlet", true);
@@ -32,6 +47,7 @@
     }
 
     setInterval('loadDoc()',200);
+
 
 </script>
 

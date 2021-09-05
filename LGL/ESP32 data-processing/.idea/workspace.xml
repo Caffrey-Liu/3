@@ -44,7 +44,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/lib/commons-codec-1.9.jar" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="模块" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.16528928" />
@@ -58,7 +58,7 @@
       <recent name="D:\GITHUB\333-334\LGL\ESP32 data-processing\src\lib" />
     </key>
   </component>
-  <component name="RunManager" selected="应用程序.ServerStart">
+  <component name="RunManager" selected="应用程序.TestImageBinary">
     <configuration name="DeletePicture" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="DeletePicture" />
       <module name="ESP32 data-processing" />
@@ -94,22 +94,24 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="class" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="应用程序.TestImageBinary" />
         <item itemvalue="应用程序.ServerStart" />
         <item itemvalue="应用程序.DeletePicture" />
-        <item itemvalue="应用程序.TestImageBinary" />
         <item itemvalue="应用程序.opencv" />
         <item itemvalue="应用程序.interpolation" />
       </list>
@@ -167,6 +169,7 @@
       <workItem from="1630618598822" duration="26000" />
       <workItem from="1630640718822" duration="663000" />
       <workItem from="1630736191919" duration="1958000" />
+      <workItem from="1630819790600" duration="290000" />
     </task>
     <servers />
   </component>
@@ -183,6 +186,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

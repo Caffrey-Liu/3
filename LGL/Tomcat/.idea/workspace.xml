@@ -33,6 +33,13 @@
     <option name="FILTER_DEBUG" value="true" />
     <option name="CUSTOM_FILTER" />
   </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="localRepository" value="D:\GITHUB\333-334\LGL\Tomcat\repository" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
   <component name="ProjectId" id="1xfGvnZjRZIIYrN7pwST0nPgEYF" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -44,13 +51,21 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/lib/mysql-connector-java-8.0.26.jar" />
-    <property name="project.structure.last.edited" value="模块" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/lib/sun.misc.BASE64Decoder.jar" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="project.structure.last.edited" value="工件" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.16528928" />
+    <property name="settings.editor.selected.configurable" value="MavenSettings" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
-  <component name="RunManager" selected="应用程序.DeletePicture">
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\GITHUB\333-334\LGL\Tomcat\src\main\java\ESP32data\Server" />
+      <recent name="D:\GITHUB\333-334\LGL\Tomcat\src\lib" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Tomcat 服务器.Tomcat 9.0.52">
     <configuration name="DeletePicture" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="ESP32data.DeletePicture" />
       <module name="Tomcat" />
@@ -64,13 +79,28 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="class" />
+    <configuration name="Insertdata" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="ESP32data.Server.Insertdata" />
+      <module name="Tomcat" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="ESP32data.Server.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="test" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="ESP32data.test" />
+      <module name="Tomcat" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="ESP32data.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -166,9 +196,13 @@
     <list>
       <item itemvalue="Tomcat 服务器.Tomcat 9.0.52" />
       <item itemvalue="应用程序.DeletePicture" />
+      <item itemvalue="应用程序.test" />
+      <item itemvalue="应用程序.Insertdata" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="应用程序.Insertdata" />
+        <item itemvalue="应用程序.test" />
         <item itemvalue="应用程序.DeletePicture" />
       </list>
     </recent_temporary>
@@ -184,10 +218,34 @@
       <workItem from="1630738965466" duration="10527000" />
       <workItem from="1630754170120" duration="19727000" />
       <workItem from="1630777997278" duration="78000" />
+      <workItem from="1630780570951" duration="8465000" />
+      <workItem from="1630820084071" duration="9846000" />
+      <workItem from="1630830839502" duration="580000" />
+      <workItem from="1630835108929" duration="8489000" />
+      <workItem from="1630844190506" duration="1449000" />
+      <workItem from="1630846085846" duration="1224000" />
+      <workItem from="1630849197283" duration="5080000" />
+      <workItem from="1630854380317" duration="25000" />
+      <workItem from="1630854417938" duration="5593000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.NoClassDefFoundError" package="java.lang" />
+          <option name="timeStamp" value="6" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="org.apache.catalina.connector.ResponseFacade" memberName="response" />
+      </pinned-members>
+    </pin-to-top-manager>
   </component>
 </project>
