@@ -18,12 +18,16 @@
 <%--    <input type="submit" value="Submit" />--%>
 <%--</form>--%>
 
-
-<div class="">
+<br>
+<br>
+<br>
+<br>
+<br>
+<div class="" align="center">
 <img id="pic" />
 </div>
 <br>
-<div>
+<div align="center">
 <button type="button" onclick="loadDoc()">请求数据</button>
 </div>
 <br>

@@ -12,8 +12,10 @@ import java.util.Date;
 public class PixelConversion extends Thread{
     //插值次数
     static int expand = 4;
-    //static String ColorType = "GCM_Pseudo2";  //伪彩2
-    static String ColorType = "GCM_Rainbow3";  //彩虹3
+    //插值维数
+    int times = 3;
+    static String ColorType = "GCM_Pseudo2";  //伪彩2
+    //static String ColorType = "GCM_Rainbow3";  //彩虹3
     float[][] TempData;
     String Picbase64;
 
@@ -31,16 +33,16 @@ public class PixelConversion extends Thread{
         int Temp;
         int red = 0, green = 0, blue = 0;
         if (Type.equals("GCM_Pseudo2")) {
-            if ((Tem >= 0) && (Tem <= 63)) {
+            if ((Tem >= 0) && (Tem <= 64)) {
                 blue = (int) (Tem / 64 * 255);
-            } else if ((Tem >= 64) && (Tem <= 127)) {
+            } else if ((Tem > 64) && (Tem <= 128)) {
                 green = (int) ((Tem - 64) / 64 * 255);
                 blue = (int) ((127 - Tem) / 64 * 255);
-            } else if ((Tem >= 128) && (Tem <= 191)) {
+            } else if ((Tem > 128) && (Tem <= 192)) {
                 red = (int) ((Tem - 128) / 64 * 255);
                 green = 255;
                 blue = 0;
-            } else if ((Tem >= 192) && (Tem <= 255)) {
+            } else if ((Tem > 192) && (Tem <= 255)) {
                 red = 255;
                 green = (int) ((255 - Tem) / 64 * 255);
                 blue = 0;
@@ -162,13 +164,20 @@ public class PixelConversion extends Thread{
         //这里是温度数据区间转换
         for (int i = 0; i < TemData.length; i++) {
             for (int j = 0; j < TemData[0].length; j++) {
-                if (TemData[i][j] <= 30) TemData[i][j] = 0;
-                //else if (TemData[i][j] > 20 && TemData[i][j] <= 27) TemData[i][j] = (TemData[i][j] * 7) - 140;
-                //else if (TemData[i][j] > 20 && TemData[i][j] <= 27) TemData[i][j] = (TemData[i][j] * 49 / 9) - 109;
-                //else if (TemData[i][j] > 27 && TemData[i][j] <= 33) TemData[i][j] = (TemData[i][j] * 9) - 194;
-                else if (TemData[i][j] > 30 && TemData[i][j] <= 33) TemData[i][j] = (TemData[i][j] * 13) - 343;
-                else if (TemData[i][j] > 33 && TemData[i][j] <= 37) TemData[i][j] = (TemData[i][j] * 32) - 953;
-                else if (TemData[i][j] > 37 && TemData[i][j] <= 40) TemData[i][j] = (TemData[i][j] * 8) - 65;
+                /*if (TemData[i][j] <= 15) TemData[i][j] = 0;
+                else if (TemData[i][j] > 15 && TemData[i][j] <= 20) TemData[i][j] = (TemData[i][j] * 8) - 112;
+                else if (TemData[i][j] > 20 && TemData[i][j] <= 26) TemData[i][j] = (float) ((TemData[i][j] * 5.3) - 34.7);
+                else if (TemData[i][j] > 26 && TemData[i][j] <= 32) TemData[i][j] = (float) ((TemData[i][j] * 16/3) -8/3);
+                else if (TemData[i][j] > 32 && TemData[i][j] <= 36) TemData[i][j] = (float) ((TemData[i][j] * 6) + 16);
+                else if (TemData[i][j] > 36 && TemData[i][j] <= 40) TemData[i][j] = (float) ((TemData[i][j] * 4) + 96);
+                else if (TemData[i][j] > 40) TemData[i][j] = 255;*/
+                if (TemData[i][j] <= 15) TemData[i][j] = 0;
+                else if (TemData[i][j] > 15 && TemData[i][j] <= 20) TemData[i][j] = (float)(TemData[i][j] * 4.8) - 40;
+                else if (TemData[i][j] > 20 && TemData[i][j] <= 26) TemData[i][j] = (float) ((TemData[i][j] * 13.33) -210.67);
+                else if (TemData[i][j] > 26 && TemData[i][j] <= 32) TemData[i][j] = (float) ((TemData[i][j] * 10.67) -141.33);
+                else if (TemData[i][j] > 32 && TemData[i][j] <= 36) TemData[i][j] = (float) ((TemData[i][j] * 8) - 56);
+                else if (TemData[i][j] > 36 && TemData[i][j] <= 40) TemData[i][j] = (float) ((TemData[i][j] * 5.75) + 25);
+                else if (TemData[i][j] > 40) TemData[i][j] = 254;
                 //System.out.print((int)TemData[i][j] + " ");
             }
             //System.out.println();
@@ -253,7 +262,8 @@ public class PixelConversion extends Thread{
             //对每一列进行插值
             int judge = 0;
             for (int n = 0; n < 2; n++) {
-                array = Insertdata.insertdata(array, judge,3);
+                //array = insert(array, judge);
+                array = Insertdata.insertdata(array, judge,times);
                 judge = (judge + 1) % 2;
             }
             for (int y = 0; y < array.length; y++) {
@@ -271,7 +281,8 @@ public class PixelConversion extends Thread{
             //对每一行进行插值
             int judge = 0;
             for (int n = 0; n < 2; n++) {
-                array = Insertdata.insertdata(array, judge,3);
+                //array = insert(array, judge);
+                array = Insertdata.insertdata(array, judge,times);
                 judge = (judge + 1) % 2;
             }
             for (int x = 0; x < array.length; x++) {

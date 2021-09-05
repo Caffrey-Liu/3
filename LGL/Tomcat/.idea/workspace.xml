@@ -105,17 +105,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="Tomcat 9.0.52" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 9.0.52" ALTERNATIVE_JRE_ENABLED="false" nameIsGenerated="true">
       <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8080/ProjectWeb" />
       <option name="UPDATING_POLICY" value="restart-server" />
@@ -236,6 +225,8 @@
       <workItem from="1630844190506" duration="1449000" />
       <workItem from="1630846085846" duration="1224000" />
       <workItem from="1630849197283" duration="5080000" />
+      <workItem from="1630854380317" duration="25000" />
+      <workItem from="1630854417938" duration="5593000" />
     </task>
     <servers />
   </component>

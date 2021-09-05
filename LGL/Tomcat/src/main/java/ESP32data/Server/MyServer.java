@@ -31,11 +31,11 @@ public class MyServer extends Thread {
             BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             String line = in.readLine();
             float[][] TemData = new float[24][32];
-            long l1 = 0,l2;
+            //long l1 = 0,l2;
             while (!line.equals("bye")) {
-                l2 = System.currentTimeMillis();
+                /*l2 = System.currentTimeMillis();
                 System.out.println((l2 - l1) + " ms");
-                l1 = l2;
+                l1 = l2;*/
                 // System.out.println(line + " ");
                 if (line.length() == 3073) {
                     int start = 1;
