@@ -42,7 +42,7 @@
         xhttp.send();
     }
 
-    setInterval('loadDoc()',500);
+    setInterval('loadDoc()',200);
 
 
 </script>

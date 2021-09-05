@@ -76,21 +76,13 @@ void readTempValues() {
 
     MLX90640_CalculateTo(mlx90640Frame, &mlx90640, EMMISIVITY, tr, tempValues);
   }
-  String str = "begin";
+  
+  String str="b";
   for (int i = 0; i < 768; i++) {
-//    if (((i % 32) == 0) && (i != 0)) {
-//      Serial.println(" ");
-//    }
-   //Serial.print((int)tempValues[i]);
-   // Serial.print(" ");
-     str = str+",";
-    str = str+tempValues[i];
-      
-    
-      
-  }
+    str = str+(int)(tempValues[i] *100);
+    }
+    client.println(str);
   //Serial.println(str);
-  client.println(str);
   
 }
 
