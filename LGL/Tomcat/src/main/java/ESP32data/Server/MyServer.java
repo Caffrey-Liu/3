@@ -40,12 +40,13 @@ public class MyServer extends Thread {
                 if (line.length() == 3073) {
                     int start = 1;
                     int end = 5;
-                    for (int y = 0; y < 24; y++)
+                    for (int y = 0; y < 24; y++){
                         for (int x = 0; x < 32; x++) {
                             TemData[y][x] = (float) (Integer.parseInt(line.substring(start,end))/100.0);
                             start += 4;
                             end += 4;
                         }
+                    }
                     PixelConversion picture = new PixelConversion();
                     float[][] Complete_TemData;
                     Complete_TemData = TemData;

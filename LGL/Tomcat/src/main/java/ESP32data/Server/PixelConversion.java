@@ -73,9 +73,8 @@ public class PixelConversion extends Thread{
     }
     
     //将RGB数组转换为图
-    public void GetPicture(String Path, BufferedImage image, int[][] RGB) {
-        String date = GetDate();
-        File file = new File(Path + "Picture" + date + ".jpg");
+    public void GetPicture(BufferedImage image, int[][] RGB) {
+
         for (int i = 0; i < RGB.length; i++) {
             for (int j = 0; j < RGB[i].length; j++) {
                 image.setRGB(j, i, RGB[i][j]);
@@ -83,25 +82,36 @@ public class PixelConversion extends Thread{
         }
 
 
+
+        //存储图片
+        SavePicture(image);
+
+    }
+
+    //保存图片到指定路径
+    public void SavePicture (BufferedImage image){
+        String Path = "D:\\GITHUB\\333-334\\LGL\\Tomcat\\src\\main\\java\\ESP32data\\jpg\\";
+        String JPGPath = Path + "Picture" + GetDate() + ".jpg";
+        File file = new File(JPGPath);
         try {
             ImageIO.write(image, "jpg", file);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        Picbase64 = GetImageStr(Path + "Picture" + date + ".jpg");
-
-
+        Picbase64 = GetImageStr(JPGPath);
     }
 
 
-    // 将图片文件转化为字节数组字符串，并对其进行Base64编码处理
-    public String GetImageBase64Code(BufferedImage img) {
+    // 通过image对象转换为流获得Base64编码
+    /*public String GetImageBase64Code(BufferedImage image) {
         byte[] data = null;
 
         // 读取图片字节数组
         try {
             //InputStream in = new FileInputStream(imgFilePath);
-            InputStream in = bufferedImageToInputStream(img);
+            ByteArrayOutputStream os = new ByteArrayOutputStream();
+            ImageIO.write(image, "JPG", os);
+            InputStream in = ;
             data = new byte[in.available()];
             in.read(data);
             in.close();
@@ -110,19 +120,10 @@ public class PixelConversion extends Thread{
         }
 
         String base64 = Base64.encodeBase64String(data);
-        System.out.println(base64);
-        // 对字节数组Base64编码
-        return base64;// 返回Base64编码过的字节数组字符串
-    }
-    public InputStream bufferedImageToInputStream(BufferedImage image) {
-        ByteArrayOutputStream os = new ByteArrayOutputStream();
-        try {
-            ImageIO.write(image, "JPG", os);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return new ByteArrayInputStream(os.toByteArray());
-    }
+        return base64;
+    }*/
+
+    //通过路径获得Base64编码
     public static String GetImageStr(String imgFilePath) {// 将图片文件转化为字节数组字符串，并对其进行Base64编码处理
         byte[] data = null;
 
@@ -203,10 +204,9 @@ public class PixelConversion extends Thread{
 
         int[][] RGB = GetRGB(Data_expand);
 
-        String Path = "D:\\GITHUB\\333-334\\LGL\\Tomcat\\src\\main\\java\\ESP32data\\jpg\\";
         BufferedImage image = new BufferedImage(Data_expand[0].length, Data_expand.length, BufferedImage.TYPE_INT_RGB);
 
-        GetPicture(Path, image, RGB);
+        GetPicture(image, RGB);
 
 
     }
@@ -252,8 +252,8 @@ public class PixelConversion extends Thread{
             }
             //对每一列进行插值
             int judge = 0;
-            for (int n = 0; n < expand; n++) {
-                array = insert(array, judge);
+            for (int n = 0; n < 2; n++) {
+                array = Insertdata.insertdata(array, judge,3);
                 judge = (judge + 1) % 2;
             }
             for (int y = 0; y < array.length; y++) {
@@ -270,8 +270,8 @@ public class PixelConversion extends Thread{
             }
             //对每一行进行插值
             int judge = 0;
-            for (int n = 0; n < expand; n++) {
-                array = insert(array, judge);
+            for (int n = 0; n < 2; n++) {
+                array = Insertdata.insertdata(array, judge,3);
                 judge = (judge + 1) % 2;
             }
             for (int x = 0; x < array.length; x++) {
