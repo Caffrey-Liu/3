@@ -1,8 +1,9 @@
 package ESP32data.Server;
+import org.apache.commons.codec.binary.Base64;
+
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 /**
@@ -10,11 +11,11 @@ import java.util.Date;
  */
 public class PixelConversion extends Thread{
     //插值次数
-    public Bridge bridge;
     static int expand = 4;
     //static String ColorType = "GCM_Pseudo2";  //伪彩2
     static String ColorType = "GCM_Rainbow3";  //彩虹3
-    Draw pic;
+    float[][] TempData;
+    String Picbase64;
 
     private int[][] GetRGB(float[][] Temptable) {
         int[][] Temp = new int[Temptable.length][Temptable[0].length];
@@ -25,6 +26,7 @@ public class PixelConversion extends Thread{
         return Temp;
     }
 
+    //把温度值转换为对应RGB值
     private int ChangeColor(float Tem, String Type, int x, int y) {
         int Temp;
         int red = 0, green = 0, blue = 0;
@@ -66,16 +68,11 @@ public class PixelConversion extends Thread{
                 blue = 0;
             }
         }
-        /*if (red == 0 && green == 0 && blue == 0) {
-            System.out.println("red = " + red + " green = " + green + " blue = " + blue);
-            System.out.println(Tem);
-            System.out.println("x == " + x + " y == " + y);
-        }*/
         Temp = (red << 16) + (green << 8) + blue;
         return Temp;
     }
     
-
+    //将RGB数组转换为图
     public void GetPicture(String Path, BufferedImage image, int[][] RGB) {
         String date = GetDate();
         File file = new File(Path + "Picture" + date + ".jpg");
@@ -85,15 +82,63 @@ public class PixelConversion extends Thread{
             }
         }
 
-        this.bridge.setImage(image);
-        pic.PutImage(image);
 
         try {
             ImageIO.write(image, "jpg", file);
         } catch (IOException e) {
             e.printStackTrace();
         }
+        Picbase64 = GetImageStr(Path + "Picture" + date + ".jpg");
+
+
     }
+
+
+    // 将图片文件转化为字节数组字符串，并对其进行Base64编码处理
+    public String GetImageBase64Code(BufferedImage img) {
+        byte[] data = null;
+
+        // 读取图片字节数组
+        try {
+            //InputStream in = new FileInputStream(imgFilePath);
+            InputStream in = bufferedImageToInputStream(img);
+            data = new byte[in.available()];
+            in.read(data);
+            in.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        String base64 = Base64.encodeBase64String(data);
+        System.out.println(base64);
+        // 对字节数组Base64编码
+        return base64;// 返回Base64编码过的字节数组字符串
+    }
+    public InputStream bufferedImageToInputStream(BufferedImage image) {
+        ByteArrayOutputStream os = new ByteArrayOutputStream();
+        try {
+            ImageIO.write(image, "JPG", os);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return new ByteArrayInputStream(os.toByteArray());
+    }
+    public static String GetImageStr(String imgFilePath) {// 将图片文件转化为字节数组字符串，并对其进行Base64编码处理
+        byte[] data = null;
+
+        // 读取图片字节数组
+        try {
+            InputStream in = new FileInputStream(imgFilePath);
+            data = new byte[in.available()];
+            in.read(data);
+            in.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        // 对字节数组Base64编码
+        return Base64.encodeBase64String(data);// 返回Base64编码过的字节数组字符串
+    }
+
 
     private String GetDate() {
 
@@ -102,7 +147,7 @@ public class PixelConversion extends Thread{
         return df.format(date);
     }
 
-
+    //处理原始温度数据
     public void DealWithData(float[][] TemData) {
        /* for (int i = 0; i < TemData.length; i++) {
             for (int j = 0; j < TemData[0].length; j++) {
@@ -193,6 +238,7 @@ public class PixelConversion extends Thread{
         return temp;
     }
 
+    //插值算法
     private float[][] Conversion(float[][] temData) {
         float[][] Temp_Data_expand = new float[temData.length * expand * expand][temData[0].length];
         float[][] Data_expand = new float[temData.length * expand * expand][temData[0].length * expand * expand];
@@ -236,10 +282,19 @@ public class PixelConversion extends Thread{
         return Data_expand;
     }
 
-    public void run(float[][] TemData,Draw pic,Bridge bridge) {
-        this.bridge = bridge;
-        this.pic = pic;
-        DealWithData(TemData);
+    public String drawing(float[][] TemData) {
+        this.TempData = TemData;
+        this.start();
+        try {
+            this.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return Picbase64;
+    }
+
+    public void run(){
+        DealWithData(TempData);
     }
 
 }

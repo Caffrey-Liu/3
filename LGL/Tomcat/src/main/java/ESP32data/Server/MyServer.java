@@ -7,8 +7,7 @@ import java.util.Date;
 
 public class MyServer extends Thread {
     int port;
-    public static Bridge bridge;
-
+    public String PictureBase64Code = "";
 
     public void startListen(int port) {
         this.port = port;
@@ -24,7 +23,6 @@ public class MyServer extends Thread {
 
     public void run() {
         try {
-            bridge = new Bridge();
             ServerSocket server = new ServerSocket(port);
             Socket socket = server.accept();
             BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
@@ -32,7 +30,6 @@ public class MyServer extends Thread {
             float[][] TemData = new float[24][32];
             int x = 0;
             int y = 0;
-            Draw pic = new Draw();
             while (!line.equals("bye")) {
                 //System.out.println(GetDate());
                 // System.out.println(line + " ");
@@ -55,48 +52,9 @@ public class MyServer extends Thread {
                 PixelConversion picture = new PixelConversion();
                 float[][] Complete_TemData;
                 Complete_TemData = TemData;
-                picture.run(Complete_TemData,pic,bridge);
-//                if (line.equals("end"))
-//                {
-//                    //处理温度数组
-//
-//
-//
-//
-//                    x = 0;
-//                    y = 0;
-//                }
-//                else if (line.equals("nan"))
-//                {
-//                    if (x == 0)
-//                        TemData[y][x] = 0;
-//                    else
-//                        TemData[y][x] = TemData[y][x-1];
-//                    x++;
-//                }
-//                else if (x == 32){
-//                    y++;
-//                    x = 0;
-//
-//                    x++;
-//                }
-
-//                else
-//                {
-//                    TemData[y][x] = Float.parseFloat(line);
-//                    x++;
-//                }
-                //OutputStream os = socket.getOutputStream();
-                //os.write((line+"\r\n").getBytes());
-                //System.out.println("x= " + x + " y = " + y);
+                PictureBase64Code = picture.drawing(Complete_TemData);
+                System.out.println(PictureBase64Code);
                 line = in.readLine();
-               /* try {
-
-                    line = in.readLine();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }*/
-
             }
             socket.close();
             server.close();

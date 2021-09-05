@@ -7,6 +7,12 @@
         <element id="directory" name="classes">
           <element id="module-output" name="Tomcat" />
         </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Maven: com.google.protobuf:protobuf-java:3.11.4" />
+          <element id="library" level="project" name="Maven: commons-codec:commons-codec:1.15" />
+          <element id="library" level="project" name="Maven: javax:javaee-web-api:8.0.1" />
+          <element id="library" level="project" name="Maven: mysql:mysql-connector-java:8.0.26" />
+        </element>
       </element>
     </root>
   </artifact>
