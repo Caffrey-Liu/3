@@ -42,7 +42,7 @@ public class MyServer extends Thread {
                     int start = 1;
                     int end = 5;
                     for (int y = 0; y < 24; y++){
-                        for (int x = 0; x < 32; x++) {
+                        for (int x = 31; x >= 0; x--) {
                             TemData[y][x] = (float) (Integer.parseInt(line.substring(start,end))/100.0);
                             start += 4;
                             end += 4;
