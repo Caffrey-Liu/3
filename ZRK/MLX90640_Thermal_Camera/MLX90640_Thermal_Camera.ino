@@ -28,7 +28,7 @@ void setup() {
 //47.100.63.226 阿里云服务器IP
 //192.168.31.248 宿舍
 
-  if (!client.connect("47.100.63.226", 10001))//连接的IP地址和端口
+  if (!client.connect("192.168.31.248", 10001))//连接的IP地址和端口
     {
         Serial.println("Connection to host failed");
         delay(1000);
