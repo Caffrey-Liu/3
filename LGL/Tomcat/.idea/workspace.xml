@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
-      <artifact name="Tomcat:war exploded" />
+      <artifact name="333_334" />
     </artifacts-to-build>
   </component>
   <component name="AutoImportSettings">
@@ -14,6 +14,9 @@
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExportToHTMLSettings">
+    <option name="OUTPUT_DIRECTORY" value="$PROJECT_DIR$/../Tomcat\exportToHTML" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -105,6 +108,17 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Tomcat 9.0.52" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 9.0.52" ALTERNATIVE_JRE_ENABLED="false" nameIsGenerated="true">
       <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8080/ProjectWeb" />
       <option name="UPDATING_POLICY" value="restart-server" />
@@ -188,9 +202,7 @@
       </ConfigurationWrapper>
       <method v="2">
         <option name="Make" enabled="true" />
-        <option name="BuildArtifacts" enabled="true">
-          <artifact name="Tomcat:war exploded" />
-        </option>
+        <option name="BuildArtifacts" enabled="true" />
       </method>
     </configuration>
     <list>
@@ -227,6 +239,15 @@
       <workItem from="1630849197283" duration="5080000" />
       <workItem from="1630854380317" duration="25000" />
       <workItem from="1630854417938" duration="5593000" />
+      <workItem from="1630862921477" duration="17000" />
+      <workItem from="1630862957170" duration="12000" />
+      <workItem from="1630865300132" duration="27000" />
+      <workItem from="1630865343798" duration="139000" />
+      <workItem from="1630865644278" duration="246000" />
+      <workItem from="1630898736185" duration="2895000" />
+      <workItem from="1630906903269" duration="28000" />
+      <workItem from="1630907063364" duration="339000" />
+      <workItem from="1630921299043" duration="744000" />
     </task>
     <servers />
   </component>

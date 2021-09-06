@@ -28,10 +28,11 @@ public class MyServer extends Thread {
         try {
             ServerSocket server = new ServerSocket(port);
             Socket socket = server.accept();
+            System.out.println("Socket服务已启动，占用端口： " + socket.getLocalPort() );
             BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             String line = in.readLine();
             float[][] TemData = new float[24][32];
-            //long l1 = 0,l2;
+            long l1 = 0,l2;
             while (!line.equals("bye")) {
                 /*l2 = System.currentTimeMillis();
                 System.out.println((l2 - l1) + " ms");
