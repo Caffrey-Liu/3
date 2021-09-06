@@ -85,11 +85,11 @@ public class PixelConversion extends Thread{
 
 
 
-        //存储图片
-        SavePicture(image);
-
+        //从文件转Base64编码
+        //SavePicture(image);
+        //从image对象转Base64编码
+        Picbase64 = GetImageBase64Code(image);
     }
-
     //保存图片到指定路径
     public void SavePicture (BufferedImage image){
         String Path = "D:\\GITHUB\\333-334\\LGL\\Tomcat\\src\\main\\java\\ESP32data\\jpg\\";
@@ -100,30 +100,30 @@ public class PixelConversion extends Thread{
         } catch (IOException e) {
             e.printStackTrace();
         }
-        Picbase64 = GetImageStr(JPGPath);
+
+        //从文件转Base64编码
+        //Picbase64 = GetImageStr(JPGPath);
+
     }
 
 
     // 通过image对象转换为流获得Base64编码
-    /*public String GetImageBase64Code(BufferedImage image) {
+    public String GetImageBase64Code(BufferedImage image) {
         byte[] data = null;
 
         // 读取图片字节数组
         try {
-            //InputStream in = new FileInputStream(imgFilePath);
             ByteArrayOutputStream os = new ByteArrayOutputStream();
             ImageIO.write(image, "JPG", os);
-            InputStream in = ;
+            InputStream in = new ByteArrayInputStream(os.toByteArray());
             data = new byte[in.available()];
             in.read(data);
             in.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        String base64 = Base64.encodeBase64String(data);
-        return base64;
-    }*/
+        return Base64.encodeBase64String(data);
+    }
 
     //通过路径获得Base64编码
     public static String GetImageStr(String imgFilePath) {// 将图片文件转化为字节数组字符串，并对其进行Base64编码处理
