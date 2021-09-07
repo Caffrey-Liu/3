@@ -25,7 +25,10 @@ void setup() {
   Serial.println(WiFi.macAddress());
   Serial.println(WiFi.localIP());
 
-  if (!client.connect("192.168.31.248", 10001))//连接的IP地址和端口
+//47.100.63.226 阿里云服务器IP
+//192.168.31.248 宿舍
+
+  if (!client.connect("47.100.63.226", 10001))//连接的IP地址和端口
     {
         Serial.println("Connection to host failed");
         delay(1000);
@@ -76,21 +79,13 @@ void readTempValues() {
 
     MLX90640_CalculateTo(mlx90640Frame, &mlx90640, EMMISIVITY, tr, tempValues);
   }
-  String str = "begin";
+  
+  String str="b";
   for (int i = 0; i < 768; i++) {
-//    if (((i % 32) == 0) && (i != 0)) {
-//      Serial.println(" ");
-//    }
-   //Serial.print((int)tempValues[i]);
-   // Serial.print(" ");
-     str = str+",";
-    str = str+tempValues[i];
-      
-    
-      
-  }
+    str = str+(int)(tempValues[i] *100);
+    }
+    client.println(str);
   //Serial.println(str);
-  client.println(str);
   
 }
 
