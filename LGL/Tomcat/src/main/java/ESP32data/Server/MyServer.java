@@ -9,13 +9,8 @@ import java.util.Date;
 import java.util.List;
 
 public class MyServer extends Thread {
-    int port;
     public String PictureBase64Code = "";
-
-    public void startListen(int port) {
-        this.port = port;
-        this.start();
-    }
+    public Socket socket;
 
     private String GetDate() {
 
@@ -26,18 +21,17 @@ public class MyServer extends Thread {
 
     public void run() {
         try {
-            ServerSocket server = new ServerSocket(port);
-            Socket socket = server.accept();
             System.out.println("Socket服务已启动，占用端口： " + socket.getLocalPort() );
             BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             String line = in.readLine();
             float[][] TemData = new float[24][32];
             long l1 = 0,l2;
             while (!line.equals("bye")) {
-                /*l2 = System.currentTimeMillis();
-                System.out.println((l2 - l1) + " ms");
-                l1 = l2;*/
+//                l2 = System.currentTimeMillis();
+//                System.out.println("耗时 " + (l2 - l1) + " ms");
+//                l1 = l2;
                 // System.out.println(line + " ");
+                System.out.println(GetDate());
                 if (line.length() == 3073) {
                     int start = 1;
                     int end = 5;
@@ -55,8 +49,6 @@ public class MyServer extends Thread {
                 }
                 line = in.readLine();
             }
-            socket.close();
-            server.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
