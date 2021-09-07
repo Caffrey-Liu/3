@@ -1,5 +1,5 @@
 <component name="ArtifactManager">
-  <artifact type="war" name="333_334">
+  <artifact type="war" build-on-make="true" name="333_334">
     <output-path>$PROJECT_DIR$/out/artifacts/333_334</output-path>
     <root id="archive" name="333_334.war">
       <element id="artifact" artifact-name="Tomcat:war exploded" />
