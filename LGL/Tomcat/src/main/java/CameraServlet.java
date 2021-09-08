@@ -24,6 +24,16 @@ public class CameraServlet extends HttpServlet {
     }
 
     @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setContentType("text/html;charset=utf-8");
+        String a = Float.toString(Server.getServer().MaxTem);
+        PrintWriter out = resp.getWriter();
+        out.println(a);
+        out.flush();
+        out.close();
+    }
+
+    @Override
     public void init() throws ServletException {
         System.out.println("开始接收图像");
         Server.port = 10001;
