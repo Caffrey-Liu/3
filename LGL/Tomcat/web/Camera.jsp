@@ -24,16 +24,17 @@
 <br>
 <br>
 <div class="" align="center">
-<img id="pic" />
+<img id="pic" >
 </div>
 <br>
-<div align="center">
-<button type="button" onclick="loadDoc()">请求数据</button>
-</div>
+<%--<div align="center">--%>
+<%--&lt;%&ndash;<button type="button" onclick="loadDoc()">请求数据</button>&ndash;%&gt;--%>
+<%--</div>--%>
 <br>
 <script>
     var xhttp = new XMLHttpRequest();
     var url = "data:image/png;base64,";
+    document.getElementById("pic").src = url+ String;
     function loadDoc() {
         xhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
