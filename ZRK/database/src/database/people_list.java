@@ -28,6 +28,7 @@ public class people_list {
         PreparedStatement preparedStatement = null;
         try {
             String sql = "insert into people_list(address,name,tel,id_num,tem,date) values(?,?,?,?,?,?)";
+            preparedStatement = con.prepareStatement(sql);
             for(int i=0;i<values.length;i++){
                 preparedStatement.setString(i,values[i]);
             }
