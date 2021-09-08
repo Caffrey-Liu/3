@@ -9,16 +9,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cc0c987c-954d-45d4-9a63-e2ac16ae2df6" name="默认变更列表" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../ZRK/database/src/database/Admin.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../ZRK/database/src/database/Admin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../latex报告/body/background.tex" beforeDir="false" afterPath="$PROJECT_DIR$/../../latex报告/body/background.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../latex报告/body/design.tex" beforeDir="false" afterPath="$PROJECT_DIR$/../../latex报告/body/design.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../latex报告/body/requirement.tex" beforeDir="false" afterPath="$PROJECT_DIR$/../../latex报告/body/requirement.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../latex报告/tjumain.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/../../latex报告/tjumain.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../latex报告/tjumain.tex" beforeDir="false" afterPath="$PROJECT_DIR$/../../latex报告/tjumain.tex" afterDir="false" />
-    </list>
+    <list default="true" id="cc0c987c-954d-45d4-9a63-e2ac16ae2df6" name="默认变更列表" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -115,17 +106,6 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -273,24 +253,13 @@
       <workItem from="1631037941219" duration="2813000" />
       <workItem from="1631040836818" duration="10545000" />
       <workItem from="1631052261891" duration="951000" />
-      <workItem from="1631080784411" duration="21139000" />
-      <workItem from="1631117137557" duration="2007000" />
+      <workItem from="1631080784411" duration="27529000" />
+      <workItem from="1631114600716" duration="3081000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
-  </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State />
-          </value>
-        </entry>
-      </map>
-    </option>
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -301,7 +270,7 @@
         </breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/web/Camera.html</url>
-          <line>118</line>
+          <line>143</line>
           <option name="timeStamp" value="7" />
         </line-breakpoint>
       </breakpoints>
