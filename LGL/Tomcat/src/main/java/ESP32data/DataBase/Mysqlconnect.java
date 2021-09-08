@@ -10,7 +10,7 @@ public class Mysqlconnect {
             e.printStackTrace();
         }
         Connection con;
-        String url = "jdbc:mysql://127.0.0.1:3306/Temp?useSSL=false";
+        String url = "jdbc:mysql://127.0.0.1:3306/333-334?useSSL=false";
         String user = "root";
         String password = "123456";
         try {
