@@ -254,6 +254,7 @@
       <workItem from="1631040836818" duration="10545000" />
       <workItem from="1631052261891" duration="951000" />
       <workItem from="1631080784411" duration="27529000" />
+      <workItem from="1631114600716" duration="3081000" />
     </task>
     <servers />
   </component>
@@ -269,7 +270,7 @@
         </breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/web/Camera.html</url>
-          <line>122</line>
+          <line>143</line>
           <option name="timeStamp" value="7" />
         </line-breakpoint>
       </breakpoints>

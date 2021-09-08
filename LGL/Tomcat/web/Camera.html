@@ -40,40 +40,61 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
     <style>
         .box {
-            /*background: url("./images/background.png") repeat;*/
+            /*background: url("./images/doggif.gif") repeat;*/
             background: #fff;
         }
 
-        .Picturecontainerleft{
+        .Picturecontainerleft {
             display: inline-block;
-            margin:auto;
+            margin: auto;
             float: left;
             width: 48%;
             flex: 0 0 auto;
             max-height: 400px;
         }
-        .Picturecontainerright{
+
+        .Picturecontainerright {
             display: inline-block;
-            margin:auto;
+            margin: auto;
             float: right;
             width: 48%;
         }
-        .PicInfo{
+
+        .PicInfo {
             height: 400px;
         }
-        .tempic{
+
+        .tempic {
             width: 35%;
-            margin:auto;
+            margin: auto;
             float: left;
         }
-        .temdata{
-            width: 65%;
-            margin:auto;
+
+        .temdata {
+            width: 50%;
+            margin: auto;
             float: right;
             text-align: left;
         }
-        .colorpic{
-           max-width: 512px;
+
+        .colorpic {
+            max-width: 512px;
+        }
+
+        .textfortime {
+            font-size: large;
+            flood-color: #0b0b0b;
+        }
+
+        .MaxTem {
+            font-size: xxx-large;
+            font-weight: bold;
+            flood-color: #e51c23;
+        }
+
+        .textforMaxTem {
+            font-size: large;
+            flood-color: #0b0b0b;
         }
     </style>
 
@@ -86,8 +107,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         </div>
         <div class="header-middle">
             <!-- container -->
-           <div class="container">
-               <div class="header-middle-logo" align="center">
+            <div class="container">
+                <div class="header-middle-logo" align="center">
                     <a href="Camera.html">&nbsp&nbsp&nbsp&nbspCamera</a>
                 </div>
                 <div class="header-middle-right">
@@ -101,8 +122,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <div class="clearfix"></div>
                 </div>
                 <div class="clearfix"></div>
-       </div>
-<!--             //container -->
+            </div>
+            <!--             //container -->
         </div>
         <div class="top-nav">
             <!-- container -->
@@ -141,19 +162,22 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <div class="PicInfo">
         <!-- Left content -->
         <div class="Picturecontainerleft" align="center">
-            <img class="colorpic"  id="pic" width="100%" >
+            <img class="colorpic" id="pic" width="100%">
         </div>
 
         <!-- Right content -->
         <div class="Picturecontainerright" align="left">
             <div class="tempic">
 
-            <img src="images/colortoTEM.png" >
+                <img src="images/colortoTEM.png">
             </div>
             <div class="temdata">
-                <a id = "time"></a>
+                <a id="time" class="textfortime"></a>
                 <br>
-                <a id = "MaxTem"></a>
+                <br>
+                <a class="textforMaxTem"> 最高温度为： </a>
+                <a id="MaxTem" class="MaxTem"></a>
+
             </div>
         </div>
     </div>
@@ -197,7 +221,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 </div>
                 <div class="footer-bottom">
                     <div class="copyright">
-                        <p>Copyright &copy; 2021 333-334 All rights reserved.<a target="_blank" href="https://github.com/Caffrey-Liu/333-334">访问我们的Git仓库!</a>
+                        <p>Copyright &copy; 2021 333-334 All rights reserved.<a target="_blank"
+                                                                                href="https://github.com/Caffrey-Liu/333-334">访问我们的Git仓库!</a>
                         </p>
                     </div>
                     <div class="clearfix"></div>
@@ -223,6 +248,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!--请求温度最大值-->
 <script>
     var temhttp = new XMLHttpRequest();
+
     function GetTem() {
         temhttp.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
@@ -233,37 +259,49 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         temhttp.open("Post", "CameraServlet", true);
         temhttp.send();
     }
+
     setInterval('GetTem()', 200);
 </script>
 <!-- 显示时间-->
 <script>
-    function getCurDate()
-
-    {
+    function getCurDate() {
         var d = new Date();
 
         var week;
 
-        switch (d.getDay()){
-            case 1: week="星期一"; break;
+        switch (d.getDay()) {
+            case 1:
+                week = "星期一";
+                break;
 
-            case 2: week="星期二"; break;
+            case 2:
+                week = "星期二";
+                break;
 
-            case 3: week="星期三"; break;
+            case 3:
+                week = "星期三";
+                break;
 
-            case 4: week="星期四"; break;
+            case 4:
+                week = "星期四";
+                break;
 
-            case 5: week="星期五"; break;
+            case 5:
+                week = "星期五";
+                break;
 
-            case 6: week="星期六"; break;
+            case 6:
+                week = "星期六";
+                break;
 
-            default: week="星期天";
+            default:
+                week = "星期天";
 
         }
 
         var years = d.getFullYear();
 
-        var month = add_zero(d.getMonth()+1);
+        var month = add_zero(d.getMonth() + 1);
 
         var days = add_zero(d.getDate());
 
@@ -271,26 +309,24 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
         var minutes = add_zero(d.getMinutes());
 
-        var seconds=add_zero(d.getSeconds());
+        var seconds = add_zero(d.getSeconds());
 
-        var ndate = years+"年"+month+"月"+days+"日 "+hours+":"+minutes+":"+seconds+" "+week;
+        var ndate = years + "年" + month + "月" + days + "日 " + hours + ":" + minutes + ":" + seconds + " " + week;
 
-        var divT=document.getElementById("time");
+        var divT = document.getElementById("time");
 
-        divT.innerHTML= ndate;
+        divT.innerHTML = ndate;
 
     }
 
-    function add_zero(temp)
-
-    {
-        if(temp<10) return "0"+temp;
+    function add_zero(temp) {
+        if (temp < 10) return "0" + temp;
 
         else return temp;
 
     }
 
-    setInterval("getCurDate()",100);
+    setInterval("getCurDate()", 100);
 </script>
 <!--请求热图像-->
 <script>
