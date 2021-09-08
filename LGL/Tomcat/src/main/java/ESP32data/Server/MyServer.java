@@ -10,6 +10,7 @@ import java.util.List;
 
 public class MyServer extends Thread {
     public String PictureBase64Code = "";
+    public float MaxTem = 0;
     public Socket socket;
 
     private String GetDate() {
@@ -31,17 +32,20 @@ public class MyServer extends Thread {
 //                System.out.println("耗时 " + (l2 - l1) + " ms");
 //                l1 = l2;
                 // System.out.println(line + " ");
-                System.out.println(GetDate());
+                //System.out.println(GetDate());
                 if (line.length() == 3073) {
+                    float max = 0;
                     int start = 1;
                     int end = 5;
                     for (int y = 0; y < 24; y++){
                         for (int x = 31; x >= 0; x--) {
                             TemData[y][x] = (float) (Integer.parseInt(line.substring(start,end))/100.0);
+                            if (TemData[y][x] > max) max =TemData[y][x];
                             start += 4;
                             end += 4;
                         }
                     }
+                    MaxTem = max;
                     PixelConversion picture = new PixelConversion();
                     float[][] Complete_TemData;
                     Complete_TemData = TemData;

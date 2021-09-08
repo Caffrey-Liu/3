@@ -40,7 +40,7 @@
             if (this.readyState == 4 && this.status == 200) {
                 var String = this.responseText;
                 document.getElementById("pic").src = url+ String;
-                console.log(String);
+                //console.log(String);
             }
         };
         xhttp.open("GET", "CameraServlet", true);
