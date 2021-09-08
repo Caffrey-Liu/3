@@ -2057,32 +2057,32 @@ span.menu {
     color: #868686;
 }
 
-.table-address ul {
+.table-title ul {
     margin: 0;
     padding: 0;
 }
 
-.table-address ul li {
+.table-title ul li {
     display: block;
     font-size: 14px;
     color: #B3B3B3;
     line-height: 1.8em;
 }
 
-.table-country h5 {
+.table-name h5 {
     font-size: 16px;
     margin: 0 0 1em 0;
     padding: 0;
     color: #B3B3B3;
 }
 
-.table-result p {
+.table-tel p {
     font-size: 14px;
     color: #B3B3B3;
     margin: 0;
 }
 
-.table-result p span {
+.table-tel p span {
     font-size: 18px;
     font-weight: 700;
     color: #868686;
@@ -2342,17 +2342,17 @@ span.menu {
         width: 100%;
     }
 
-    .table-address {
+    .table-title {
         float: left;
         width: 33%;
     }
 
-    .table-country {
+    .table-name {
         float: left;
         width: 33%;
     }
 
-    .table-result {
+    .table-tel {
         float: left;
         width: 33%;
     }
@@ -2510,11 +2510,11 @@ span.menu {
         padding: 0;
     }
 
-    .table-country h5 {
+    .table-name h5 {
         font-size: 16px;
     }
 
-    .table-result p {
+    .table-tel p {
         overflow: hidden;
         height: 20px;
     }
@@ -2691,20 +2691,20 @@ span.menu {
         margin: 0 0 .5em 0;
     }
 
-    .table-address {
+    .table-title {
         float: none;
         width: 100%;
         text-align: center;
     }
 
-    .table-country {
+    .table-name {
         float: none;
         width: 100%;
         text-align: center;
         margin-top: 1em;
     }
 
-    .table-result {
+    .table-tel {
         float: none;
         width: 100%;
         text-align: center;
