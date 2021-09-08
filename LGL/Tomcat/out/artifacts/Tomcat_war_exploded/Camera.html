@@ -49,6 +49,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             margin:auto;
             float: left;
             width: 48%;
+            flex: 0 0 auto;
+            max-height: 400px;
         }
         .Picturecontainerright{
             display: inline-block;
@@ -60,17 +62,19 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             height: 400px;
         }
         .tempic{
-            width: 40%;
+            width: 35%;
             margin:auto;
             float: left;
         }
         .temdata{
-            width: 55%;
+            width: 65%;
             margin:auto;
             float: right;
             text-align: left;
         }
-        /*div img{width: 100% }*/
+        .colorpic{
+           max-width: 512px;
+        }
     </style>
 
 </head>
@@ -137,14 +141,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <div class="PicInfo">
         <!-- Left content -->
         <div class="Picturecontainerleft" align="center">
-            <img id="pic" width="100%">
+            <img class="colorpic"  id="pic" width="100%" >
         </div>
 
         <!-- Right content -->
         <div class="Picturecontainerright" align="left">
             <div class="tempic">
 
-            <img src="images/colortoTEM.png" height="392px">
+            <img src="images/colortoTEM.png" >
             </div>
             <div class="temdata">
                 <a id = "time"></a>
@@ -219,22 +223,17 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!--请求温度最大值-->
 <script>
     var temhttp = new XMLHttpRequest();
-    var maxtem = "data:image/png;base64,";
-    document.getElementById("pic").src = url + String;
-
     function GetTem() {
-        xhttp.onreadystatechange = function () {
+        temhttp.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
                 var String = this.responseText;
                 document.getElementById("MaxTem").innerText = String;
-                console.log(String);
             }
         };
-        xhttp.open("Post", "TemServlet", true);
-        xhttp.send();
+        temhttp.open("Post", "CameraServlet", true);
+        temhttp.send();
     }
-
-    setInterval('GetTem', 200);
+    setInterval('GetTem()', 200);
 </script>
 <!-- 显示时间-->
 <script>
