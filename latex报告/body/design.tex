@@ -9,16 +9,68 @@
 
 
 \section{硬件系统设计}
-(1)MLX90640温度采集模块
+硬件系统由MLX90640传感器和ESP32组成，开发环境为arduino。
 
-MLX90640 是工业标准并经过完全校准的 32*24
-像素热红外阵列传感器，采用 4 脚 TO39 封装以及
-I2C 兼容的数字接口。
-MLX90640 包含 768 个热红外像素点。内嵌自身
-环境温度传感器和 VDD 电压检测 ADC。通过 I2C 接
-口，可以访问存储于内部 RAM 中的红外阵列、环境
-温度以及 VDD 实时数据。
+主要分为两个部分来实现，首先是对传感器的数据进行采集。这一部分通过在网上收集资料，按照说明引入$MLX90640\_API.cpp$，$MLX90640\_I2C_Driver.cpp$中的函数来实现。
 
-(2)ESP32模块
-ESP32是一款安全稳定、低功耗、低成本的物联网芯片，搭载 RISC-V 32 位单核处理器，支持 2.4 GHz Wi-Fi 和 Bluetooth LE 5.0。为物联网产品提供行业领先的射频性能、完善的安全机制和丰富的内存资源。ESP32-C3 对 Wi-Fi 和 Bluetooth LE 5.0 的双重支持降低了设备配网难度，适用于广泛的物联网应用场景。
+\begin{lstlisting} 
+// 读取全部校正参数
+    
+int MLX90640_DumpEE(uint8_t slaveAddr, uint16_t *eeData) 
+    
+//解析校正参数为计算参数
+    
+int MLX90640_ExtractParameters(uint16_t * eeData,paramsMLX90640 *mlx90640) 
+    
+//读取一帧计算用实时数据
+    
+int MLX90640_GetFrameData(uint8_t slaveAddr, uint16_t *frameData) 
+    
+//得到外壳温度
+    
+float MLX90640_GetTa(uint16_t *frameData, const paramsMLX90640 *params)
+    
+//返回VDD电压值
+   
+float MLX90640_GetVdd(uint16_t *frameData, const paramsMLX90640 *params)
+    
+//返回绝对温度
+   
+void MLX90640_CalculateTo(uint16_t *frameData, const paramsMLX90640 *params, float emissivity, float tr, float *result)
+    
+    
+\end{lstlisting}
 
+另一部分的内容就是使用WiFi将获取到的数据发送出去。这里用到了ESP32的WiFi库，使用WiFi.begin()方法，传入WiFi名称和密码就可以连接。
+
+发送数据用到的是WiFiClient，将得到的浮点数数组*100转为整形，拼接为字符串后后调用WiFiClient.print()方法即可将其发送出去。
+\section{后端服务器设计}
+后端服务器主要由两部分构成。第一部分是利用socket通信接收ESP32通过WiFi发送的数据，将其读入float数组以待后续使用。
+$Insertdata$类实现了二元和三元插值算法，$PixelConversion$类实现了温度和可视颜色的伪彩编码转换，$Draw$类实现了图像的绘制。
+\section{前端页面设计}
+\section{数据库设计}
+\begin{table}[htbp]
+    \caption{admin表}\label{tab:table1}
+    \vspace{0.5em}\centering\wuhao
+    \begin{tabular}{ccccccc}
+    \toprule[1.5pt]
+    变量 & $id$ & $name$ & $account$&$password$ &$tel$&$email$\\
+    \midrule[1pt]
+    类型& int & varchar & varchar&varchar&varchar&varchar\\
+    \bottomrule[1.5pt]
+    \end{tabular}
+    \vspace{\baselineskip}
+    \end{table}
+    
+    \begin{table}[htbp]
+        \caption{peoplelist表}\label{tab:table2}
+        \vspace{0.5em}\centering\wuhao
+        \begin{tabular}{cccccccc}
+        \toprule[1.5pt]
+        变量 & $id$&$address$ & $name$ & $tel$&$id_num$ &$tem$&$date$\\
+        \midrule[1pt]
+        类型& int & varchar & varchar&varchar&varchar&varchar&date\\
+        \bottomrule[1.5pt]
+        \end{tabular}
+        \vspace{\baselineskip}
+        \end{table}
