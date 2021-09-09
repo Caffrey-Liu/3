@@ -5,7 +5,7 @@ import java.sql.*;
 
 public class Admin {
     Connection con;
-    String url = "jdbc:mysql://127.0.0.1:3306/test1?useSSL=false";
+    String url = "jdbc:mysql://127.0.0.1:3306/333_334?useSSL=false";
     String user = "root";
     String password = "123456";
     public Admin() {

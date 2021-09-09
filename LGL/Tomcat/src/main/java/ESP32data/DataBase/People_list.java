@@ -34,6 +34,7 @@ public class People_list {
             for(int i=0;i<values.length;i++){
                 preparedStatement.setString(i+1,values[i]);
             }
+            System.out.println(preparedStatement.toString());
             return preparedStatement.executeUpdate();
         }
         catch (SQLException e) {

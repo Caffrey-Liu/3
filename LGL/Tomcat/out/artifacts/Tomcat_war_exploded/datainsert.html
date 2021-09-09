@@ -4,9 +4,10 @@
 <title>Matches</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="keywords" content="Forward Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template, 
+<meta name="keywords" content="Forward Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template,
 Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
-<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<script type="application/x-javascript">
+addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 <link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
 <link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all">
 <!-- js -->
@@ -19,7 +20,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script type="text/javascript" src="js/easing.js"></script>
 <script type="text/javascript">
 jQuery(document).ready(function($) {
-	$(".scroll").click(function(event){		
+	$(".scroll").click(function(event){
 		event.preventDefault();
 	$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
 });
@@ -59,20 +60,20 @@ jQuery(document).ready(function($) {
 					<ul class="nav1">
 						<li><a href="datainsert.html">人员信息登记</a>
 						<li>
-						<li><a href="datamining.html">人员信息查询</a>
+						<li><a href="DatainsertServlet" target="_blank">人员信息查询</a>
 						<li>
-						<li><a href="admininfo.html">管理员信息查询</a>
+						<li><a href="AdminServlet" target="_blank">管理员信息查询</a>
 						<li>
 						<div class="clearfix"> </div>
 					</ul>
 					<!-- script-for-menu -->
-							 <script> 
+							 <script>
 							   $( "span.menu" ).click(function() {
 								 $( "ul.nav1" ).slideToggle( 300, function() {
 								 // Animation complete.
 								  });
 								 });
-							
+
 							</script>
 						<!-- /script-for-menu -->
 				</div>
@@ -97,37 +98,37 @@ jQuery(document).ready(function($) {
 									<div class="list-hedding">
 										<h4>家庭住址</h4>
 									</div>
-									<input type="text" name="address" id="address" class="contact-input" autofocus required="" />
+									<input type="text" name="address" id="address" class="contact-input" autofocus required="required" />
 								</div>
 								<div class="col-md-4 table-title">
 									<div class="list-hedding">
 										<h4>姓名</h4>
 									</div>
-									<input type="text" name="name" id="name" class="contact-input" autofocus required="" />
+									<input type="text" name="name" id="name" class="contact-input" autofocus required="required" />
 								</div>
 								<div class="col-md-4 table-title">
 									<div class="list-hedding">
 										<h4>联系方式</h4>
 									</div>
-									<input type="text" name="tel" id="tel" class="contact-input" autofocus required="" />
+									<input type="text" name="tel" id="tel" class="contact-input" autofocus required="required" />
 								</div>
 								<div class="col-md-4 table-title">
 									<div class="list-hedding">
 										<h4>身份证件</h4>
 									</div>
-									<input type="text" name="idnum" id="idnum" class="contact-input" autofocus required="" />
+									<input type="text" name="idnum" id="idnum" class="contact-input" autofocus required="required" />
 								</div>
 								<div class="col-md-4 table-title">
 									<div class="list-hedding">
 										<h4>实时体温</h4>
 									</div>
-									<input type="text" name="tem" id="tem" class="contact-input" autofocus required="" />
+									<input type="text" name="tem" id="tem" class="contact-input" autofocus required="required" />
 								</div>
 								<div class="col-md-4 table-title">
 									<div class="list-hedding">
 										<h4>日期</h4>
 									</div>
-									<input type="text" name="date" id="date" class="contact-input" autofocus required="" />
+									<input type="text" name="date" id="date" class="contact-input" autofocus required="required" />
 								</div>
 								<div class="clearfix"> </div>
 							</div>
@@ -141,30 +142,27 @@ jQuery(document).ready(function($) {
 			<!-- //container -->
 		</div>
 		<script>
-			console.log("开始执行ajax");
 			var datahttp = new XMLHttpRequest();
 			datahttp.onreadystatechange = function () {
-				console.log(this.readyState);
-				if (this.readyState == 4 && this.status == 200) {
-					var String = this.responseText;
-					console.log(String);
-					alert(String);
-				}
+                if (datahttp.readyState == 4 && datahttp.status == 200) {
+                    var String = datahttp.responseText;
+                    console.log(String);
+                    alert(String);
+                }
+            }
 				function datainsert (){
 					var url = "DatainsertServlet?";
 					var address = document.getElementById("address").value;
-					var name = document.getElementById("address").value;
+					var name = document.getElementById("name").value;
 					var tel = document.getElementById("tel").value;
 					var idnum = document.getElementById("idnum").value;
 					var tem = document.getElementById("tem").value;
 					var date = document.getElementById("date").value;
 					url = url + "address=" + address + "&name=" + name + "&tel=" + tel
 							+ "&idnum=" + idnum + "&tem=" + tem + "&date=" + date;
-					datahttp.open("get",url, true);
+					datahttp.open("post",url, true);
 					datahttp.send();
 				}
-
-			};
 		</script>
 		<!-- //match -->
 		<!-- footer -->
@@ -222,12 +220,12 @@ jQuery(document).ready(function($) {
 								  			containerID: 'toTop', // fading element id
 											containerHoverID: 'toTopHover', // fading element hover id
 											scrollSpeed: 1200,
-											easingType: 'linear' 
+											easingType: 'linear'
 								 		};
 										*/
-										
+
 										$().UItoTop({ easingType: 'easeOutQuart' });
-										
+
 									});
 								</script>
 									<a href="#" id="toTop" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
