@@ -221,10 +221,18 @@ void readTempValues() {
   
   String str="b";
   for (int i = 0; i < 768; i++) {
+    if (i % 32 == 0 && i !=0){
+    Serial.println();
+   } 
+   Serial.print((int)tempValues[i]);
+    Serial.print(" ");
     str = str+(int)(tempValues[i] *100);
     }
+    Serial.println();
+    Serial.println();
+    Serial.println();
     client.println(str);
-    Serial.println(str);
+    //Serial.println(str);
   
 }
 
